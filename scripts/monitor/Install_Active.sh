@@ -23,7 +23,7 @@ if [[ $Processes != '0' ]];then echo $(hostname -i ) 'Agent process already exis
 }
 
 function Install_5() {
-    curl -O http://mirrors.itan90.cn/monitor/rpm/zabbix-agent-5.0.2-1.el5.x86_64.rpm
+    curl -O http://mirrors.itan90.cn/scripts/monitor/rpm/zabbix-agent-5.0.2-1.el5.x86_64.rpm
     rpm -ivh zabbix-agent-5.0.2-1.el5.x86_64.rpm &>/dev/null
     if [[ $? != '0' ]];then echo $(hostname -i ) 'Install failed!!!';fi
     service zabbix-agent start
@@ -32,7 +32,7 @@ function Install_5() {
 }
 
 function Install_6() {
-    curl -O http://mirrors.itan90.cn/monitor/rpm/zabbix-agent-5.0.2-1.el6.x86_64.rpm
+    curl -O http://mirrors.itan90.cn/scripts/monitor/rpm/zabbix-agent-5.0.2-1.el6.x86_64.rpm
     rpm -ivh zabbix-agent-5.0.2-1.el6.x86_64.rpm &>/dev/null
     if [[ $? != '0' ]];then echo $(hostname -i ) 'Install failed!!!';fi
     service zabbix-agent start
@@ -41,7 +41,7 @@ function Install_6() {
 }
 
 function Install_7() {
-    curl -O http://mirrors.itan90.cn/monitor/rpm/zabbix-agent-5.0.2-1.el7.x86_64.rpm
+    curl -O http://mirrors.itan90.cn/scripts/monitor/rpm/zabbix-agent-5.0.2-1.el7.x86_64.rpm
     rpm -ivh zabbix-agent-5.0.2-1.el7.x86_64.rpm &>/dev/null
     if [[ $? != '0' ]];then echo $(hostname -i ) 'Install failed!!!';fi
     systemctl start zabbix-agent
@@ -99,12 +99,12 @@ fi
 
 function Include_Monitor() {
     # 进程监控
-    curl -s -O http://mirrors.itan90.cn/monitor/monitor.d/process_monitor.tar.gz &>/dev/null
+    curl -s -O http://mirrors.itan90.cn/scripts/monitor/monitor.d/process_monitor.tar.gz &>/dev/null
     tar zxf process_monitor.tar.gz -C /etc/zabbix/zabbix_agentd.d/ && rm -rf process_monitor.tar.gz
     echo "已成功配置自动发现进程监控配置!"
 
     # 任务计划管理
-    cd /usr/src && curl -s -O "http://mirrors.itan90.cn/monitor/monitor.d/Install_crond_manager.sh" && chmod +x Install_crond_manager.sh && ./Install_crond_manager.sh
+    cd /usr/src && curl -s -O "http://mirrors.itan90.cn/scripts/monitor/monitor.d/Install_crond_manager.sh" && chmod +x Install_crond_manager.sh && ./Install_crond_manager.sh
     echo "已成功配置统一Crond管理探针!"
     
     # 重启探针
