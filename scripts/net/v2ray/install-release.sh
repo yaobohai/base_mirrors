@@ -388,15 +388,15 @@ ExecStart=/usr/local/bin/v2ray -confdir $JSONS_PATH" |
     echo "# In case you have a good reason to do so, duplicate this file in the same directory and make your customizes there.
 # Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 [Service]
-Environment="V2RAY_VMESS_AEAD_FORCED=false"
 ExecStart=
+Environment="V2RAY_VMESS_AEAD_FORCED=false"
 ExecStart=/usr/local/bin/v2ray -config ${JSON_PATH}/config.json" > \
       '/etc/systemd/system/v2ray.service.d/10-donot_touch_single_conf.conf'
     echo "# In case you have a good reason to do so, duplicate this file in the same directory and make your customizes there.
 # Or all changes you made will be lost!  # Refer: https://www.freedesktop.org/software/systemd/man/systemd.unit.html
 [Service]
-Environment="V2RAY_VMESS_AEAD_FORCED=false"
 ExecStart=
+Environment="V2RAY_VMESS_AEAD_FORCED=false"
 ExecStart=/usr/local/bin/v2ray -config ${JSON_PATH}/%i.json" > \
       '/etc/systemd/system/v2ray@.service.d/10-donot_touch_single_conf.conf'
   fi
