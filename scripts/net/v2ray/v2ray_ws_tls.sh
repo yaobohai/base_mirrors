@@ -151,12 +151,13 @@ install_v2ray(){
     bash <(curl -L -s ${other_scripts_url}/scripts/net/v2ray/install-release.sh)
     cd /usr/local/etc/v2ray/
     rm -f config.json
-    wget ${other_scripts_url}/v2ray/config.json
+    wget ${other_scripts_url}/scripts/net/v2ray/config.json
     v2uuid=$(cat /proc/sys/kernel/random/uuid)
     sed -i "s/aaaa/$v2uuid/;" config.json
     newpath=$(cat /dev/urandom | head -1 | md5sum | head -c 4)
     sed -i "s/mypath/$newpath/;" config.json
     sed -i "s/mypath/$newpath/;" /etc/nginx/conf.d/default.conf
+    sed -i '11i Environment="V2RAY_VMESS_AEAD_FORCED=false"' /etc/systemd/system/v2ray.service
     cd /etc/nginx/html
     rm -f /etc/nginx/html/*
     wget ${other_scripts_url}/scripts/net/v2ray/web.zip
