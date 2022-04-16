@@ -30,7 +30,7 @@ jobs:
         with:
           switches: -avzh
           path: README.md
-          remote_path: ${{ secrets.MY_DEVOPS_MIRRORS_PATH }}/index.md
+          remote_path: ${{ secrets.MY_DEVOPS_MIRRORS_PATH }}
           remote_host: ${{ secrets.MY_DEVOPS_HOST_ADDRESS }}
           remote_port: 60501
           remote_user: root
