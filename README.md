@@ -170,3 +170,5 @@ cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/
 ```
 
 ## 2021年07月02日 mirrors 信息发布建立
+
+222
