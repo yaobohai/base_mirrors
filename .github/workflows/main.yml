@@ -34,7 +34,7 @@ jobs:
           type: markdown
           content: |
             # 💯👨‍💻 Success 🎉🎉🎉
-            > Site: Mirros.itan90.cn Deploy success
+            > Site: https://mirros.itan90.cn Deploy success
       # 失败通知
       - name: deploy failure
         if: ${{ failure() }}
@@ -44,4 +44,4 @@ jobs:
           type: markdown
           content: |
             # 💤🤷‍♀️ failure 🙅‍♂️💣
-            > Site: Mirros.itan90.cn Deploy
+            > Site: https://mirros.itan90.cn Deploy failure
