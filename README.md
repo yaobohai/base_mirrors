@@ -24,25 +24,6 @@ The remote download tool has been started successfully! Access address is: http:
 访问返回的地址后即可打开网页；默认存在50MB大小的文件用来测试下载速度
 ```
 
-## 2021年10月04日 新增Python镜像源 ⭐
-
-优点：国内自建Python mirrors镜像源；提高安装模块速度
-
-注意：默认3141端口不对外开放；需联系邮箱 `admin@bohai.email`开放访问
-
-```
-[root@node ~]# mkdir ~/.pip
-[root@node ~]# vim ~/.pip/pip.conf
-[global]
-timeout = 60
-index-url = http://mirrors.itan90.cn:3141/root/pypi/+simple/
-
-[install]
-trusted-host = mirrors.itan90.cn
-
-[root@node ~]# pip install requests
-```
-
 ## 2021年10月01日 支持IPV6访问请求 ⭐
 
 支持IPV6发起请求尝试访问,但禁止Ping
@@ -86,7 +67,7 @@ EUserv IPV6 LXC架构服务器 暂未支持 但有计划编写
 ## 2021年09月29日 新增IP查询脚本 ⭐
 
 ```
-$ curl -s -O http://mirrors.itan90.cn/scripts/ip_query && chmod +x ip_query && ./ip_query
+$ curl -s -O http://mirrors.itan90.cn/scripts/other/ip_query && chmod +x ip_query && ./ip_query
 # 执行后返回以下信息：
 虚拟 IPV4 地址: 114.0.0.0.0
 虚拟 IPV6 地址: 240e:388...
@@ -99,7 +80,7 @@ $ curl -s -O http://mirrors.itan90.cn/scripts/ip_query && chmod +x ip_query && .
 *安装BBR加速，会让您的科学上网速度提升很多。*
 
 ```
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/bbr/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/net/bbr/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 ```
 
 *在弹出的界面选1，安装内核，安装完之后vps会重启，SSH会断开连接，重启等待1到2分钟，重新连接vps ssh，输入以下代码，在弹出的界面输入5，使用BBR。*
@@ -111,7 +92,7 @@ cd /usr/src && ./tcp.sh
 V2Ray安装脚本：
 
 ```
-cd /usr/src && curl -O http://mirrors.itan90.cn/v2ray/v2ray_ws_tls.sh && chmod +x v2ray_ws_tls.sh && ./v2ray_ws_tls.sh
+cd /usr/src && curl -O http://mirrors.itan90.cn/scripts/net/v2ray/v2ray_ws_tls.sh && chmod +x v2ray_ws_tls.sh && ./v2ray_ws_tls.sh
 ```
 
 *选择：1，回车，因为脚本需要安装Nginx，比较慢，大概五六分钟，等待一下。过程中会提示需要输入域名，输入解析到本VPS的域名，然后回车。* *漫长等待之后，会出现安装完成的信息，您需要注意的是，会有配置参数反馈到您的终端，需要记下来*
@@ -126,7 +107,7 @@ cd /usr/src && curl -O http://mirrors.itan90.cn/v2ray/v2ray_ws_tls.sh && chmod +
 
 监控服务地址：node.connect.itan90.cn (默认)
 
-监控组件配置：<http://mirrors.itan90.cn/monitor/monitor.d/>
+监控组件配置：<http://mirrors.itan90.cn/scripts/monitor/monitor.d/>
 
 ---
 
@@ -139,13 +120,13 @@ cd /usr/src && curl -O http://mirrors.itan90.cn/v2ray/v2ray_ws_tls.sh && chmod +
 2021年10月26日 增加ssh暴力破解监控配置（自动化配置 无需人工参与）
 
 ```
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/monitor/Install.sh" && chmod +x Install.sh && ./Install.sh
+cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/monitor/Install.sh" && chmod +x Install.sh && ./Install.sh
 
 # 使用主动模式脚本
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/monitor/Install_Active.sh" && chmod +x Install_Active.sh && ./Install_Active.sh
+cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/monitor/Install_Active.sh" && chmod +x Install_Active.sh && ./Install_Active.sh
 
 # 使用其他服务地址
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/monitor/Install.sh" && chmod +x Install.sh && ./Install.sh 你的服务端地址
+cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/monitor/Install.sh" && chmod +x Install.sh && ./Install.sh 你的服务端地址
 ```
 
 ## 2021年07月03日 增加服务器初始化脚本
@@ -170,5 +151,3 @@ cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/
 ```
 
 ## 2021年07月02日 mirrors 信息发布建立
-
-222
