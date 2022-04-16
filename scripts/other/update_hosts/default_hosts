@@ -1,0 +1,16 @@
+# 189 hosts
+120.39.219.172    k8s.node1
+120.39.219.93     k8s.node2
+120.39.222.66     k8s.node3
+120.39.222.33     k8s.node4
+120.39.222.67     k8s.master
+
+# clonecone
+173.82.152.3      app.cloudcone.com
+
+# Github user content
+185.199.108.133  raw.githubusercontent.com
+185.199.109.133  raw.githubusercontent.com
+185.199.110.133  raw.githubusercontent.com
+185.199.111.133  raw.githubusercontent.com
+
