@@ -19,8 +19,8 @@ jobs:
         with:
           switches: -avzh
           path: .
-          remote_path: /www/wwwroot/mirrors.itan90.cn/
-          remote_host: 121.37.170.106
+          remote_path: ${{ secrets.MY_DEVOPS_MIRRORS_PATH }}
+          remote_host: ${{ secrets.MY_DEVOPS_HOST_ADDRESS }}
           remote_port: 60501
           remote_user: root
           remote_key: ${{ secrets.MY_DEVOPS_RSA_PRIVATE_KEY }}
@@ -30,7 +30,7 @@ jobs:
         if: ${{ success() }}
         uses: fifsky/dingtalk-action@master
         with:
-          url: https://oapi.dingtalk.com/robot/send?access_token=a6ffe61727c851508a55b7a9ef4a1d85755def7fdd3a7ef7edcd70ba601873d5
+          url: https://oapi.dingtalk.com/robot/send?access_token=${{ secrets.MY_DEVOPS_DING_TOKEN }}
           type: markdown
           content: |
             # 💯👨‍💻 Success 🎉🎉🎉
@@ -40,7 +40,7 @@ jobs:
         if: ${{ failure() }}
         uses: fifsky/dingtalk-action@master
         with:
-          url: https://oapi.dingtalk.com/robot/send?access_token=a6ffe61727c851508a55b7a9ef4a1d85755def7fdd3a7ef7edcd70ba601873d5
+          url: https://oapi.dingtalk.com/robot/send?access_token=${{ secrets.MY_DEVOPS_DING_TOKEN }}
           type: markdown
           content: |
             # 💤🤷‍♀️ failure 🙅‍♂️💣
