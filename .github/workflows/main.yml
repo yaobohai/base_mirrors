@@ -18,7 +18,7 @@ jobs:
         uses: burnett01/rsync-deployments@4.1
         with:
           switches: -avzh
-          path: .
+          path: ./*
           remote_path: ${{ secrets.MY_DEVOPS_MIRRORS_PATH }}
           remote_host: ${{ secrets.MY_DEVOPS_HOST_ADDRESS }}
           remote_port: 60501
