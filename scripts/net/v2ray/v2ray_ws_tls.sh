@@ -39,13 +39,13 @@ install_nginx(){
     systemctl stop firewalld
     systemctl disable firewalld
     yum install -y libtool perl-core zlib-devel gcc wget pcre* unzip
-    wget ${other_scripts_url}/ssl/openssl-1.1.1a.tar.gz
+    wget ${other_scripts_url}/source/openssl-1.1.1a.tar.gz
     tar xzvf openssl-1.1.1a.tar.gz
 
     mkdir /etc/nginx
     mkdir /etc/nginx/ssl
     mkdir /etc/nginx/conf.d
-    wget ${other_scripts_url}/nginx/nginx-1.15.8.tar.gz
+    wget ${other_scripts_url}/source/nginx-1.15.8.tar.gz
     tar xf nginx-1.15.8.tar.gz && rm nginx-1.15.8.tar.gz
     cd nginx-1.15.8
     ./configure --prefix=/etc/nginx --with-openssl=../openssl-1.1.1a --with-openssl-opt='enable-tls1_3' --with-http_v2_module --with-http_ssl_module --with-http_gzip_static_module --with-http_stub_status_module --with-http_sub_module --with-stream --with-stream_ssl_module
@@ -148,7 +148,7 @@ EOF
 install_v2ray(){
 
     yum install -y wget
-    bash <(curl -L -s ${other_scripts_url}/v2ray/install-release.sh)
+    bash <(curl -L -s ${other_scripts_url}/scripts/net/v2ray/install-release.sh)
     cd /usr/local/etc/v2ray/
     rm -f config.json
     wget ${other_scripts_url}/v2ray/config.json
@@ -159,7 +159,7 @@ install_v2ray(){
     sed -i "s/mypath/$newpath/;" /etc/nginx/conf.d/default.conf
     cd /etc/nginx/html
     rm -f /etc/nginx/html/*
-    wget ${other_scripts_url}/v2ray/web.zip
+    wget ${other_scripts_url}/scripts/net/v2ray/web.zip
     unzip web.zip
     /etc/nginx/sbin/nginx -s stop
     /etc/nginx/sbin/nginx
@@ -244,7 +244,7 @@ start_menu(){
     install_v2ray
     ;;
     2)
-    bash <(curl -L -s ${other_scripts_url}/v2ray/install-release.sh)
+    bash <(curl -L -s ${other_scripts_url}/scripts/net/v2ray/install-release.sh)
     ;;
     3)
     remove_v2ray
