@@ -1,3 +1,21 @@
+## 2022年04月17日 增加Socket5代理
+
+内网环境：
+
+```
+export all_proxy="http://192.168.0.88:10801"
+export http_proxy="http://192.168.0.88:10801"
+export https_proxy="http://192.168.0.88:10801"
+```
+
+外网环境：
+
+```
+export all_proxy="http://121.37.170.106:10801"
+export http_proxy="http://121.37.170.106:10801"
+export https_proxy="http://121.37.170.106:10801"
+```
+
 ## 2021年12月19日 增加远程下载工具 ⭐
 
 1、安装Docker
