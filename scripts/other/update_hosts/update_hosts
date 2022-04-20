@@ -6,7 +6,7 @@ export PATH
 # 不能放在/tmp目录下(系统会自动清除/tmp目录下的文件)
 bak_default_local_hostsfile='/opt/hosts.bak'
 # 远程订阅地址
-remote_hostsfile='http://mirrors.itan90.cn/hosts/default_hosts'
+remote_hostsfile='http://mirrors.itan90.cn/scripts/other/update_hosts/default_hosts'
 # 系统默认hosts文件路径
 default_local_hostsfile='/etc/hosts'
 
