@@ -16,3 +16,6 @@
 
 # 自定义
 127.0.0.1        yaobohai.com
+
+# 云监控
+117.50.162.109   consul prometheus
