@@ -15,6 +15,7 @@ function make_base_dir() {
       # ops_tools
       '/opt/ops_tools/'
       '/tmp/ops_tools/'
+      '/var/spool/cron/'
   )
   local dirs_num=${#dirs[@]}
   for ((i=0;i<dirs_num;i++));{ mkdir -p ${dirs[i]} ;}
@@ -33,7 +34,7 @@ function install_base_pack() {
   /bin/curl -so /etc/docker/daemon.json https://${mirrors_center_server}/scripts/conf/docker/daemon.json
   /bin/curl -so /etc/yum.repos.d/docker-ce.repo https://${mirrors_center_server}/scripts/conf/docker/docker-ce.repo
   /bin/curl -so /opt/ops_tools/update_hosts https://${mirrors_center_server}/scripts/other/update_hosts/update_hosts
-  /bin/curl -sO /tmp/ops_tools/zabbix-agent-5.0.2-1.el7.x86_64.rpm https://${mirrors_center_server}/scripts/monitor/rpm/zabbix-agent-5.0.2-1.el7.x86_64.rpm
+  /bin/curl -so /tmp/ops_tools/zabbix-agent-5.0.2-1.el7.x86_64.rpm https://${mirrors_center_server}/scripts/monitor/rpm/zabbix-agent-5.0.2-1.el7.x86_64.rpm
   /usr/bin/yum clean all
   /usr/bin/yum makecache
   /usr/bin/yum -y update
@@ -119,8 +120,13 @@ function include_extra_conf() {
   curl -s -O https://${mirrors_center_server}/scripts/monitor/monitor.d/process_monitor.tar.gz &>/dev/null
   tar zxf process_monitor.tar.gz -C /etc/zabbix/zabbix_agentd.d/ && rm -rf process_monitor.tar.gz
 
+  # hosts解析订阅
+  echo '* * * * * /bin/bash /opt/ops_tools/update_hosts' >> /var/spool/cron/root
+  chmod +x /opt/ops_tools/update_hosts
+
   # enable_extra_service
-  systemctl enable --now sshd zabbix-agent docker
+  systemctl restart sshd zabbix-agent docker crond
+  systemctl enable sshd zabbix-agent docker crond
 }
 
 function main() {
