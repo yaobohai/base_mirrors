@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-mirrors_center_server=$1
-if [[ $mirrors_center_server == '' ]];then mirrors_center_server='mirrors.itan90.cn';fi
+monitor_center_server=$1
+mirrors_center_server='mirrors.itan90.cn'
+
+if [[ $monitor_center_server == '' ]];then monitor_center_server='mirrors.itan90.cn';fi
 
 function make_base_dir() {
   local dirs=(
@@ -24,8 +26,8 @@ function make_base_dir() {
 function system_base_info() {
   os_mem_total=$(free -m|grep 'Mem'|awk '{print $2}')
   os_cpu_total=$(lscpu|grep 'Core(s) per socket'|awk '{print $4}')
+  os_address_external=$(curl -4s ip.sb)
   os_address_internal=$(hostname -I|awk '{print $1}')
-  os_address_external=$(hostname -I|awk '{print $1}')
   os_type=$(cat /etc/redhat-release|awk '{print $1,$2}')
   os_version=$(cat /etc/redhat-release|sed -r 's/.* ([0-9]+)\..*/\1/')
 }
