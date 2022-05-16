@@ -92,8 +92,8 @@ EOF
     PidFile=/var/run/zabbix/zabbix_agentd.pid
     LogFile=/var/log/zabbix/zabbix_agentd.log
     LogFileSize=0
-    Server=$mirrors_center_server
-    ServerActive=$mirrors_center_server
+    Server=$monitor_center_server
+    ServerActive=$monitor_center_server
     Hostname=$os_address_external
     HostMetadataItem=system.uname
     Include=/etc/zabbix/zabbix_agentd.d/*.conf
