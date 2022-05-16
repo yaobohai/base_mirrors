@@ -164,8 +164,7 @@ cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/
 应用程序：Remote Download（8999端口）
 
 ```
-#!/bin/bash
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/init/main.sh" && chmod +x main.sh && ./main.sh
+curl -s "http://mirrors.itan90.cn/scripts/init/main.sh" |bash
 ```
 
 ## 2021年07月02日 mirrors 信息发布建立
