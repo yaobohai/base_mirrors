@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 monitor_center_server=$1
-mirrors_center_server='raw.githubusercontent.com'
+mirrors_center_server='raw.githubusercontent.com/yaobohai/base_mirrors/develop'
 
 if [[ $monitor_center_server == '' ]];then monitor_center_server='mirrors.itan90.cn';fi
 
