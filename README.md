@@ -151,20 +151,30 @@ cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/
 
 ---
 
-初始化脚本版本：1.0.1
-
-初始化脚本备注：推荐在主机安装时通过Base64传入主机内自动化执行脚本
-
+初始化脚本版本：1.0.2
 ---
 
-2022年1月7日 更新笔记：
+2022年05月18日 更新笔记：
 
-基础环境：进程监控、SSH监控、主机监控、DOCKER、DOCKER COMPOSE
+> 初始化基础环境清单
 
-应用程序：Remote Download（8999端口）
+- 主机监控
+- 进程监控
+- 优化内核
+- 时间同步
+- DOCKER
+- 基础工具包
+- 域名解析订阅
+- SSH-KEY登录
+- DOCKER COMPOSE
 
 ```
-curl -s "http://mirrors.itan90.cn/scripts/init/main.sh" |bash
+# 国内
+curl -s "https://mirrors.itan90.cn/scripts/init/main.sh" |bash
+
+# 海外
+curl -s "https://raw.githubusercontent.com/yaobohai/base_mirrors/develop/scripts/init/main_raw.sh" |bash
 ```
+
 
 ## 2021年07月02日 mirrors 信息发布建立

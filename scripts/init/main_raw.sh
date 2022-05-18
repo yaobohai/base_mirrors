@@ -41,7 +41,9 @@ function install_base_pack() {
   /usr/bin/yum makecache
   /usr/bin/yum -y update
   /usr/bin/yum -y install sl gcc gcc-c++ \
-  vim wget ntp ntpdate docker-ce-18.09.9 docker-compose
+  vim wget ntp ntpdate docker-ce-18.09.9 docker-compose \
+  tree epel-release telnet ftp mysql git net-tools bash-completion \
+  jq sysstat yum-utils device-mapper-persistent-data lvm2
   /usr/bin/yum -y localinstall /tmp/ops_tools/zabbix-agent-5.0.2-1.el7.x86_64.rpm
 }
 
