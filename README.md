@@ -150,7 +150,6 @@ cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/
 ## 2021年07月03日 增加服务器初始化脚本
 
 ---
-
 初始化脚本版本：1.0.2
 ---
 
