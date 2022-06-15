@@ -63,7 +63,7 @@ function optimize_base_system() {
   systemctl disable firewalld
 
   cat > /etc/sysctl.conf <<EOF
-    vm.swappiness = 0
+    vm.swappiness = 100
     net.ipv4.neigh.default.gc_stale_time=120
     net.ipv4.conf.all.rp_filter=0
     net.ipv4.conf.default.rp_filter=0
