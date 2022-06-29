@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-data > /tmp/ssssss
+date > /tmp/ssssss
