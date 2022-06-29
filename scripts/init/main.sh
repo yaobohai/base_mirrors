@@ -63,7 +63,7 @@ function optimize_base_system() {
   systemctl disable firewalld
 
   cat > /etc/sysctl.conf <<EOF
-    vm.swappiness = 0
+    vm.swappiness = 10
     net.ipv4.neigh.default.gc_stale_time=120
     net.ipv4.conf.all.rp_filter=0
     net.ipv4.conf.default.rp_filter=0
@@ -78,9 +78,6 @@ function optimize_base_system() {
     ##linux在高版本内核中移除了这个参数
     #net.ipv4.tcp_tw_recycle = 1
     net.ipv4.tcp_fin_timeout = 10
-    net.ipv6.conf.all.disable_ipv6 = 1
-    net.ipv6.conf.default.disable_ipv6 = 1
-    net.ipv6.conf.lo.disable_ipv6 = 1
     net.ipv4.conf.lo.arp_announce=2
     vm.max_map_count=262144
     vm.overcommit_memory = 1
