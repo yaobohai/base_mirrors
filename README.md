@@ -24,16 +24,6 @@ The remote download tool has been started successfully! Access address is: http:
 访问返回的地址后即可打开网页；默认存在50MB大小的文件用来测试下载速度
 ```
 
-## 2021年10月01日 支持IPV6访问请求 ⭐
-
-支持IPV6发起请求尝试访问,但禁止Ping
-
-```
-root@srv12776:~# ping -6 mirrors.itan90.cn
-PING mirrors.itan90.cn(2407:c080:801:fffe::7925:aa6a (2407:c080:801:fffe::7925:aa6a)) 56 data bytes
-
-```
-
 ## 2021年10月01日 新增部署WARP支持
 
 ```
@@ -57,13 +47,6 @@ net.ipv6.conf.lo.disable_ipv6 = 0
 $ sysctl -p
 ```
 
-EUserv IPV6 LXC架构服务器 暂未支持 但有计划编写
-
-```
-# EUserv IPV6 LXC架构 专用脚本
-
-```
-
 ## 2021年09月29日 新增IP查询脚本 ⭐
 
 ```
@@ -77,25 +60,27 @@ $ curl -s -O http://mirrors.itan90.cn/scripts/other/ip_query && chmod +x ip_quer
 
 ## 2021年09月10日 新增部署V2RAY脚本 ⭐
 
-*安装BBR加速，会让您的科学上网速度提升很多。*
+1、安装BBR加速 
 
 ```
 cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/net/bbr/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 ```
 
-*在弹出的界面选1，安装内核，安装完之后vps会重启，SSH会断开连接，重启等待1到2分钟，重新连接vps ssh，输入以下代码，在弹出的界面输入5，使用BBR。*
+2、更新内核
 
 ```
+输入以下代码。在弹出的界面选1，安装内核，安装完之后vps会重启，SSH会断开连接，重启等待1到2分钟，重新连接vps ssh，输入以下代码，在弹出的界面输入5，使用BBR
+
 cd /usr/src && ./tcp.sh
 ```
 
-V2Ray安装脚本：
+3、安装V2RAY
 
 ```
+# 输入以下代码
+# 选择：1 回车因为脚本需要安装Nginx，比较慢，大概五六分钟，等待一下。过程中会提示需要输入域名，输入解析到本服务器的域名，然后回车 等即可
 cd /usr/src && curl -O http://mirrors.itan90.cn/scripts/net/v2ray/v2ray_ws_tls.sh && chmod +x v2ray_ws_tls.sh && ./v2ray_ws_tls.sh
 ```
-
-*选择：1，回车，因为脚本需要安装Nginx，比较慢，大概五六分钟，等待一下。过程中会提示需要输入域名，输入解析到本VPS的域名，然后回车。* *漫长等待之后，会出现安装完成的信息，您需要注意的是，会有配置参数反馈到您的终端，需要记下来*
 
 ## 2021年08月23日 增加监控探针安装 ⭐
 
@@ -110,14 +95,6 @@ cd /usr/src && curl -O http://mirrors.itan90.cn/scripts/net/v2ray/v2ray_ws_tls.s
 监控组件配置：<http://mirrors.itan90.cn/scripts/monitor/monitor.d/>
 
 ---
-
-更新笔记：
-
-2021年10月3日 增加进程自动发现监控配置（自动化配置 无需人工参与）
-
-2021年10月5日 增加统一Crond管理探针配置（自动化配置 无需人工参与）
-
-2021年10月26日 增加ssh暴力破解监控配置（自动化配置 无需人工参与）
 
 ```
 cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/monitor/Install.sh" && chmod +x Install.sh && ./Install.sh
