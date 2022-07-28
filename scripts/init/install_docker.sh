@@ -1,7 +1,8 @@
 #!/bin/bash
 ## 下载docker-ce镜像源并安装
 
-cd /etc/yum.repos.d/ && wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+mirrors_center_server='mirrors.itan90.cn'
+/bin/curl -so /etc/yum.repos.d/docker-ce.repo https://${mirrors_center_server}/scripts/conf/docker/docker-ce.repo
 
 yum install -y docker-ce-18.09.9 docker-compose && systemctl enable docker && systemctl start docker
 
