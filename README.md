@@ -1,6 +1,6 @@
 ## 2021年12月19日 增加远程下载工具 ⭐
 
-1、安装Docker
+1、安装Docker(已安装则可忽略)
 
 ```
 yum -y install docker \
