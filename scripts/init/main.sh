@@ -136,8 +136,6 @@ function main() {
   install_base_pack
   optimize_base_system
   include_extra_conf
-  unlink $0
-  reboot
 }
 
-main
+main && unlink $0 && reboot
