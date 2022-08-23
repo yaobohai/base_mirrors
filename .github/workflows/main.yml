@@ -21,12 +21,12 @@ jobs:
         run: sed -i "3i\    基于分支：${GITHUB_REF_NAME} 由 ${{ github.actor }} 持续第 ${GITHUB_RUN_NUMBER} 次更新" ./README.md
       - name: 添加更新描述
         run: sed -i "4i\    更新内容：${{ github.event.commits[0].message }}" ./README.md
-      - name: 添加更新描述
-        run: sed -i "5i\    更新内容：${{ github.event.head_commit.message }}" ./README.md
+#       - name: 添加更新描述
+#         run: sed -i "5i\    更新内容：${{ github.event.head_commit.message }}" ./README.md
       - name: 优化显示排版
         run: sed -i "6i\    " ./README.md
-      - name: test
-        run: env
+#       - name: test
+#         run: env
         
       - name: 部署站点资源
         uses: burnett01/rsync-deployments@4.1
