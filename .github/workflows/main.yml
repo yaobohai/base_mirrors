@@ -9,19 +9,21 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: 拉取最新代码
         uses: actions/checkout@v2
         with:
           persist-credentials: false
           
       - name: 添加更新日期
         run: sed -i "1i\> update time:$(date +%Y-%m-%d)" ./README.md
+      - name: 添加更新人
+        run: sed -i "2i\> update by:${{ steps.write.outputs.name }}" ./README.md          
       - name: 添加更新操作
-        run: sed -i "1i\> update commit:${{ steps.write.outputs.name }}" ./README.md
-      - name: 优化排版
-        run: sed -i "2i\ " ./README.md
+        run: sed -i "3i\> update commit:${{ github.ref }}" ./README.md
+      - name: 优化显示排版
+        run: sed -i "4i\    " ./README.md
   
-      - name: deployments scripts
+      - name: 部署站点资源
         uses: burnett01/rsync-deployments@4.1
         with:
           switches: -avzh
@@ -33,7 +35,7 @@ jobs:
           remote_key: ${{ secrets.MY_DEVOPS_RSA_PRIVATE_KEY }}
 
       # 成功通知
-      - name: deploy success
+      - name: 部署成功通知
         if: ${{ success() }}
         uses: fifsky/dingtalk-action@master
         with:
@@ -43,7 +45,7 @@ jobs:
             # 💯👨‍💻 Success 🎉🎉🎉
             > Site: https://mirrors.itan90.cn/ Deploy success
       # 失败通知
-      - name: deploy failure
+      - name: 部署失败通知
         if: ${{ failure() }}
         uses: fifsky/dingtalk-action@master
         with:
