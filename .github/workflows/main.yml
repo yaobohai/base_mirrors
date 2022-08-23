@@ -14,10 +14,12 @@ jobs:
         with:
           persist-credentials: false
           
-      - name: update file
-        run: sed -i "1i\> update time:$(date +%Y-%m-%d)" ./README.md \
-             && sed -i "1i\> update commit:${{ steps.write.outputs.name }}" ./README.md \
-             && sed -i "2i\ " ./README.md
+      - name: 添加更新日期
+        run: sed -i "1i\> update time:$(date +%Y-%m-%d)" ./README.md
+      - name: 添加更新操作
+        run: sed -i "1i\> update commit:${{ steps.write.outputs.name }}" ./README.md
+      - name: 优化排版
+        run: sed -i "2i\ " ./README.md
   
       - name: deployments scripts
         uses: burnett01/rsync-deployments@4.1
