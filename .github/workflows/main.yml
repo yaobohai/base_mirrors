@@ -17,9 +17,11 @@ jobs:
       - name: 添加更新日期
         run: sed -i "1i\> update time:$(date +%Y-%m-%d)" ./README.md
       - name: 添加更新人
-        run: sed -i "2i\> update by:${{ steps.write.outputs.name }}" ./README.md          
-      - name: 添加更新操作
-        run: sed -i "3i\> update commit:${{ github.ref }}" ./README.md
+        run: sed -i "2i\> update by:${{ github.actor }}" ./README.md    
+      - name: 添加更新描述
+        run: sed -i "3i\> update branch:${{ github.actor }}" ./README.md        
+      - name: 添加更新分支
+        run: sed -i "3i\> update branch:${{ github.ref.name }}" ./README.md
       - name: 优化显示排版
         run: sed -i "4i\    " ./README.md
   
