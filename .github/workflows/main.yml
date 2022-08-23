@@ -16,11 +16,13 @@ jobs:
       - name: 描述
         run: sed -i "1i\## 发布描述" ./README.md          
       - name: 添加更新日期
-        run: sed -i "2i\    最终发布于:$( date -d "+8 hour" "+%Y-%m-%d %H:%M:%S")" ./README.md
+        run: sed -i "2i\    发布时间：$( date -d "+8 hour" "+%Y-%m-%d %H:%M:%S")" ./README.md
       - name: 添加更新分支
-        run: sed -i "3i\    基于${GITHUB_REF_NAME}分支由 ${{ github.actor }} 持续${GITHUB_RUN_NUMBER}次发布" ./README.md
+        run: sed -i "3i\    基于分支：${GITHUB_REF_NAME} 由 ${{ github.actor }} 持续第 ${GITHUB_RUN_NUMBER} 次发布" ./README.md
+      - name: 添加更新描述
+        run: sed -i "4i\    发布描述：None" ./README.md
       - name: 优化显示排版
-        run: sed -i "4i\    " ./README.md
+        run: sed -i "5i\    " ./README.md
       - name: test
         run: env
         
