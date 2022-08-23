@@ -21,7 +21,7 @@ jobs:
       - name: 添加更新分支
         run: sed -i "3i\> update branch:${{ github.ref }}" ./README.md
       - name: 添加更新描述
-        run: sed -i "4i\> update describe:${{ github.event }}" ./README.md        
+        run: sed -i "4i\> update describe:${{ github.comment }}" ./README.md        
       - name: 优化显示排版
         run: sed -i "5i\    " ./README.md
   
