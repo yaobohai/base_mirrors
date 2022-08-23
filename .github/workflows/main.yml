@@ -15,7 +15,7 @@ jobs:
           persist-credentials: false
           
       - name: update file
-        run: ls .
+        run: cat ./README.md
 #         run: sed -i "1i\> update time:$(date +%Y-%m-%d)" README.md
 #              sed -i "1i\> update commit:${{ steps.write.outputs.name }}" README.md
 #              sed -i "2i\ " README.md
