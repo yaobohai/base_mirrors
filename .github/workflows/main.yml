@@ -15,15 +15,13 @@ jobs:
           persist-credentials: false
           
       - name: 添加更新日期
-        run: sed -i "1i\> update time:$(date -d "+8 hour" "+%Y-%m-%d %H:%M:%S")" ./README.md
-      - name: 添加更新人
-        run: sed -i "2i\> update by:${{ github.actor }}" ./README.md    
+        run: sed -i "1i\>发布日期:$(date -d "+8 hour" "+%Y-%m-%d %H:%M:%S")" ./README.md
       - name: 添加更新分支
-        run: sed -i "3i\> update branch:${{ github.ref }}" ./README.md
+        run: sed -i "2i\> 已基于${GITHUB_REF_NAME}分支由 ${{ github.actor }} 持续${GITHUB_RUN_NUMBER}次发布" ./README.md
       - name: 添加更新描述
-        run: sed -i "4i\> update describe:${{ github.comment }}" ./README.md        
+        run: sed -i "3i\> update describe:${{ github.comment }}" ./README.md        
       - name: 优化显示排版
-        run: sed -i "5i\    " ./README.md
+        run: sed -i "4i\    " ./README.md
       - name: test
         run: env
         
