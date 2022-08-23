@@ -17,7 +17,7 @@ jobs:
       - name: 添加更新日期
         run: sed -i "1i\> update time:$(date -d "+8 hour" "+%Y-%m-%d %H:%M:%S")" ./README.md
       - name: 添加更新人
-        run: sed -i "2i\> update by:${{ github.actor }}--${{ github.commits[][author][email]}}" ./README.md    
+        run: sed -i "2i\> update by:${{ github.actor }}--${{ github.commits }}" ./README.md    
       - name: 添加更新分支
         run: sed -i "3i\> update branch:${{ github.ref }}" ./README.md
       - name: 添加更新描述
