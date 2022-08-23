@@ -25,7 +25,7 @@ jobs:
       - name: 优化显示排版
         run: sed -i "5i\    " ./README.md
       - name: test
-        run: echo ${{ github.env }}
+        run: env
         
       - name: 部署站点资源
         uses: burnett01/rsync-deployments@4.1
