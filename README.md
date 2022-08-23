@@ -27,7 +27,7 @@ The remote download tool has been started successfully! Access address is: http:
 ## 2021年10月01日 新增部署WARP支持
 
 ```
-参考: https://itan90.cn/archives/49/
+参考: [https://itan90.cn/archives/49/](https://itan90.cn/Cloudflare_WARP/)
 ```
 
 部分系统执行报错：RTNETLINK answers: Permission denied
