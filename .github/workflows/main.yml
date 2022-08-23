@@ -15,9 +15,7 @@ jobs:
           persist-credentials: false
           
       - name: 添加更新日期
-        run: export Zone=Asia/Shanghai
-             ntpdate -u ntp2.aliyun.com
-             sed -i "1i\> update time:$(date '+%Y-%m-%d %H:%M:%S')" ./README.md
+        run: Zone=Asia/Shanghai && sed -i "1i\> update time:$(date '+%Y-%m-%d %H:%M:%S')" ./README.md
       - name: 添加更新人
         run: sed -i "2i\> update by:${{ github.actor }}" ./README.md    
       - name: 添加更新分支
