@@ -126,8 +126,8 @@ function include_extra_conf() {
   chmod +x /opt/ops_tools/update_hosts
 
   # enable_extra_service
-  systemctl restart sshd zabbix-agent docker crond
   systemctl enable sshd zabbix-agent docker crond
+  systemctl restart sshd zabbix-agent docker crond
 }
 
 function main() {
