@@ -40,7 +40,7 @@ function install_base_pack() {
   /usr/bin/yum clean all
   /usr/bin/yum makecache
   /usr/bin/yum -y update
-  /usr/bin/yum -y install sl gcc gcc-c++ \
+  /usr/bin/yum -y install sudo gcc gcc-c++ \
   vim wget ntp ntpdate docker-ce-18.09.9 docker-compose \
   tree epel-release telnet ftp mysql git net-tools bash-completion \
   jq sysstat yum-utils device-mapper-persistent-data lvm2 htop
