@@ -128,6 +128,9 @@ curl -s "https://mirrors.itan90.cn/scripts/init/main.sh" |bash
 
 # 海外
 curl -s "https://raw.githubusercontent.com/yaobohai/base_mirrors/develop/scripts/init/main_raw.sh" |bash
+
+# 不执行监控部署
+curl -s "https://mirrors.itan90.cn/scripts/init/main_no_monitor.sh" |bash
 ```
 
 
