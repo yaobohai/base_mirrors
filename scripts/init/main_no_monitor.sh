@@ -83,18 +83,6 @@ function optimize_base_system() {
     net.core.somaxconn = 1024
 EOF
 
-  cat > /etc/zabbix/zabbix_agentd.conf <<EOF
-    PidFile=/var/run/zabbix/zabbix_agentd.pid
-    LogFile=/var/log/zabbix/zabbix_agentd.log
-    LogFileSize=0
-    Server=$monitor_center_server
-    ServerActive=$monitor_center_server
-    Hostname=$os_address_external
-    HostMetadataItem=system.uname
-    Include=/etc/zabbix/zabbix_agentd.d/*.conf
-    UnsafeUserParameters=1
-EOF
-
   useradd appuser
   usermod -a -G docker appuser
   echo 'appuser ALL=(ALL)       NOPASSWD:ALL' >> /etc/sudoers.d/appuser
