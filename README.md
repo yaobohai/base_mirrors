@@ -23,9 +23,7 @@ use_compression = true
 
 ```shell
 # x86
-docker run -itd \
---name=frpc \
---restart=always \
+docker run -itd --name=frpc --restart=always \
 -e FRPS_ADDR=你的服务端地址 \
 -e FRPS_PORT=你的服务端端口 \
 -v /app/frpc/frpc.ini:/app/frpc/frpc.ini \
