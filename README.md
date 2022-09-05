@@ -1,3 +1,44 @@
+## 2022年09月06日 增加FRPC客户端
+
+```shell
+$ mkdir -p /app/frpc/
+$ vim /app/frpc/frpc.ini
+
+[common]
+server_addr = {{ .Envs.FRPS_ADDR }}
+server_port = {{ .Envs.FRPS_PORT }}
+tcp_mux = true
+protocol = tcp
+dns_server = 114.114.114.114
+
+[demo]
+privilege_mode = true
+type = tcp
+local_ip = 192.168.1.1
+local_port = 80
+remote_port = 8080
+use_encryption = true
+use_compression = true
+```
+
+```shell
+# x86
+docker run -itd \
+--name=frpc \
+--restart=always \
+-e FRPS_ADDR=你的服务端地址 \
+-e FRPS_PORT=你的服务端端口 \
+-v /app/frpc/frpc.ini:/app/frpc/frpc.ini \
+registry.cn-hangzhou.aliyuncs.com/bohai_repo/frpc:0.28.2
+
+# arm
+docker run -itd --name=frpc --restart=always \
+-e FRPS_ADDR=你的服务端地址 \
+-e FRPS_PORT=你的服务端端口 \
+-v /app/frpc/frpc.ini:/app/frpc/frpc.ini \
+registry.cn-hangzhou.aliyuncs.com/bohai_repo/frpc-arm:0.28.2
+```
+
 ## 2021年12月19日 增加远程下载工具 ⭐
 
 1、安装Docker(已安装则可忽略)
