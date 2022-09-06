@@ -5,11 +5,15 @@ $ mkdir -p /app/frpc/
 $ vim /app/frpc/frpc.ini
 
 [common]
-server_addr = {{ .Envs.FRPS_ADDR }}
-server_port = {{ .Envs.FRPS_PORT }}
 tcp_mux = true
 protocol = tcp
+admin_port = 7400
+admin_addr = 0.0.0.0
 dns_server = 114.114.114.114
+server_addr = {{ .Envs.FRPS_ADDR }}
+server_port = {{ .Envs.FRPS_PORT }}
+admin_user = {{ .Envs.FRPC_USER }}
+admin_pwd = {{ .Envs.FRPC_PASSWD }}
 
 [demo]
 privilege_mode = true
@@ -24,18 +28,28 @@ use_compression = true
 ```shell
 # x86
 docker run -itd --name=frpc --restart=always \
+-p 7400:7400 \
 -e FRPS_ADDR=你的服务端地址 \
 -e FRPS_PORT=你的服务端端口 \
+-e FRPC_USER=客户端管理用户 \
+-e FRPC_PASSWD=客户端管理密码 \
 -v /app/frpc/frpc.ini:/app/frpc/frpc.ini \
 registry.cn-hangzhou.aliyuncs.com/bohai_repo/frpc:0.28.2
 
 # arm
 docker run -itd --name=frpc --restart=always \
+-p 7400:7400 \
 -e FRPS_ADDR=你的服务端地址 \
 -e FRPS_PORT=你的服务端端口 \
+-e FRPC_USER=客户端管理用户 \
+-e FRPC_PASSWD=客户端管理密码 \
 -v /app/frpc/frpc.ini:/app/frpc/frpc.ini \
 registry.cn-hangzhou.aliyuncs.com/bohai_repo/frpc-arm:0.28.2
 ```
+
+客户管理UI: http://IP:7400 (配置WEB管理、热加载等)
+
+![ADMIN_UI](https://resource.static.tencent.itan90.cn/mac_pic/2022-09-06/Hec0Vb.png)
 
 ## 2021年12月19日 增加远程下载工具 ⭐
 
