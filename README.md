@@ -47,7 +47,7 @@ docker run -itd --name=frpc --restart=always \
 registry.cn-hangzhou.aliyuncs.com/bohai_repo/frpc-arm:0.28.2
 ```
 
-客户管理UI: http://IP:7400 (配置WEB管理、热加载等)
+客户端管理UI: http://IP:7400 (配置WEB管理、热加载等)
 
 ![ADMIN_UI](https://resource.static.tencent.itan90.cn/mac_pic/2022-09-06/Hec0Vb.png)
 
