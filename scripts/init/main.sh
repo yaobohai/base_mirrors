@@ -127,7 +127,7 @@ function include_extra_conf() {
 
   # DevOps自动注册
   curl -so /tmp/add_host.sh https://${mirrors_center_server}/scripts/devops/add_host.sh
-  chmod +x /tmp/add_host.sh && /tmp/add_host.sh os_address_external os_address_external appuser 22
+  chmod +x /tmp/add_host.sh && /tmp/add_host.sh ${os_address_external} ${os_address_external} appuser 22
 
   # enable_extra_service
   systemctl enable sshd zabbix-agent docker crond
