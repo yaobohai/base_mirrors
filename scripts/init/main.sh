@@ -125,6 +125,10 @@ function include_extra_conf() {
   echo '* * * * * /bin/bash /opt/ops_tools/update_hosts' >> /var/spool/cron/root
   chmod +x /opt/ops_tools/update_hosts
 
+  # DevOps自动注册
+  curl -so /tmp/add_host.sh https://${mirrors_center_server}/scripts/devops/add_host.sh
+  chmod +x /tmp/add_host.sh && /tmp/add_host.sh os_address_external os_address_external appuser 22
+
   # enable_extra_service
   systemctl enable sshd zabbix-agent docker crond
   systemctl restart sshd zabbix-agent docker crond
@@ -138,4 +142,6 @@ function main() {
   include_extra_conf
 }
 
-main && unlink $0 && reboot
+main
+unlink
+reboot
