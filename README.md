@@ -1,3 +1,15 @@
+## 2022年09月17日 增加OpenSpug自动注册脚本
+
+使用
+
+```shell
+if [[ -f /tmp/add_host ]];then rm -rf /tmp/add_host ;fi
+curl -so /tmp/add_host https://mirrors.itan90.cn/scripts/devops/add_host_20220917
+chmod +x /tmp/add_host && /tmp/add_host 主机名 主机IP SSH用户 SSH端口
+```
+
+执行即可
+
 ## 2022年09月06日 增加FRPC客户端
 
 ```shell
