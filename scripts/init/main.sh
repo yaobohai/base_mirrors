@@ -126,7 +126,7 @@ function include_extra_conf() {
   echo '* * * * * /bin/bash /opt/ops_tools/update_hosts' >> /var/spool/cron/root
   chmod +x /opt/ops_tools/update_hosts
 
-  # DevOps自动注册
+  # DevOps自动注册(appuser)
   curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}
   chmod +x /tmp/add_host && /tmp/add_host ${os_address_external} ${os_address_external} appuser 22
 
