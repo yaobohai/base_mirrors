@@ -2,6 +2,7 @@
 
 monitor_center_server=$1
 mirrors_center_server='mirrors.itan90.cn'
+devops_scripts_version='20220917'
 
 if [[ $monitor_center_server == '' ]];then monitor_center_server='mirrors.itan90.cn';fi
 
@@ -126,7 +127,7 @@ function include_extra_conf() {
   chmod +x /opt/ops_tools/update_hosts
 
   # DevOps自动注册
-  curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host
+  curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}
   chmod +x /tmp/add_host && /tmp/add_host ${os_address_external} ${os_address_external} appuser 22
 
   # enable_extra_service
