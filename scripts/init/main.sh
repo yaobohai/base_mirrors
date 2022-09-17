@@ -135,12 +135,17 @@ function include_extra_conf() {
   systemctl restart sshd zabbix-agent docker crond
 }
 
+function notice() {
+    curl -s "https://push.spug.cc/send/YVgrGJNVjG0N?os_address_external=${os_address_external}&os_address_internal=${os_address_internal}&os_type=${os_type}&os_version=${os_version}&os_cpu_total=${os_cpu_total}&os_mem_total=${os_mem_total}"
+}
+
 function main() {
   make_base_dir
   system_base_info
   install_base_pack
   optimize_base_system
   include_extra_conf
+  notice
 }
 
 main
