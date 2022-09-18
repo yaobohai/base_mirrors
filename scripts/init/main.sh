@@ -2,7 +2,7 @@
 
 monitor_center_server=$1
 mirrors_center_server='mirrors.itan90.cn'
-devops_scripts_version='20220917'
+devops_scripts_version='20220919'
 
 if [[ $monitor_center_server == '' ]];then monitor_center_server='mirrors.itan90.cn';fi
 
