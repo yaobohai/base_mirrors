@@ -149,5 +149,5 @@ function main() {
 }
 
 main
-unlink
+unlink $0
 reboot
