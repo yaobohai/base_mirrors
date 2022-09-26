@@ -4,7 +4,7 @@
 
 ```shell
 if [[ -f /tmp/add_host ]];then rm -rf /tmp/add_host ;fi
-curl -so /tmp/add_host https://mirrors.itan90.cn/scripts/devops/add_host_20220917
+curl -so /tmp/add_host https://mirrors.itan90.cn/scripts/devops/add_host_20220919-SNAPSHOT
 chmod +x /tmp/add_host && /tmp/add_host 主机名 主机IP SSH用户 SSH端口
 ```
 
