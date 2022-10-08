@@ -1,14 +1,38 @@
 ## 2022年09月17日 增加OpenSpug自动注册脚本
 
-使用
+
+
+使用步骤-创建角色
 
 ```shell
-if [[ -f /tmp/add_host ]];then rm -rf /tmp/add_host ;fi
-curl -so /tmp/add_host https://mirrors.itan90.cn/scripts/devops/add_host_20220919-SNAPSHOT
-chmod +x /tmp/add_host && /tmp/add_host 主机名 主机IP SSH用户 SSH端口
+1、新建主机组：自动注册
+2、创建角色：api
+3、功能权限：新建主机
+4、主机权限：自动注册
+5、新建账户：api --> 角色: api
 ```
 
-执行即可
+使用步骤-执行脚本 
+
+```shell
+# 程序仅支持amd64位处理器、Linux系统、可连接运维平台;被控主机需提前配置运维平台ssh公钥（则 运维平台可免密登录到被控主机）
+
+# 运维平台地址;例如：https://ops.demo.com/
+export DEVOPS_URL='https://ops.demo.com/'
+# 运维平台账户;例如：api
+export DEVOPS_USER='api'
+# 运维平台api用户密码;例如：demo123
+export DEVOPS_PASSWD='demo123'
+
+if [[ -f /tmp/add_host ]];then rm -rf /tmp/add_host ;fi
+curl -so /tmp/add_host https://mirrors.itan90.cn/scripts/devops/add_host_20221008
+chmod +x /tmp/add_host && /tmp/add_host 被控主机名 被控主机IP 被控主机SSH用户 被控主机SSH端口
+
+# 例如：
+# chmod +x /tmp/add_host && /tmp/add_host host_01 192.168.0.1 root 22
+```
+
+按照上述操作;执行即可
 
 ## 2022年09月06日 增加FRPC客户端
 
