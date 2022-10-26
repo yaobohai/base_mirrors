@@ -112,6 +112,8 @@ EOF
   chmod 600 /home/appuser/.ssh/authorized_keys
   chown -R appuser:appuser /home/appuser/
 
+  sed -i 's/#UseDNS yes/UseDNS no/g' /etc/ssh/sshd_config
+  sed -i 's/GSSAPIAuthentication yes/GSSAPIAuthentication no/g' /etc/ssh/sshd_config
   sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
   echo 'RSAAuthentication yes' >> /etc/ssh/sshd_config
   echo 'PubkeyAuthentication yes' >> /etc/ssh/sshd_config
@@ -125,6 +127,9 @@ function include_extra_conf() {
   # hosts解析订阅
   echo '* * * * * /bin/bash /opt/ops_tools/update_hosts' >> /var/spool/cron/root
   chmod +x /opt/ops_tools/update_hosts
+
+  # 时间订阅
+  echo "*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com" >> /var/spool/cron/root
 
   # DevOps自动注册(appuser)
   curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}

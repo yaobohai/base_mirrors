@@ -96,6 +96,8 @@ EOF
   chown -R appuser:appuser /home/appuser/
 
   sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
+  sed -i 's/#UseDNS yes/UseDNS no/g' /etc/ssh/sshd_config
+  sed -i 's/GSSAPIAuthentication yes/GSSAPIAuthentication no/g' /etc/ssh/sshd_config
   echo 'RSAAuthentication yes' >> /etc/ssh/sshd_config
   echo 'PubkeyAuthentication yes' >> /etc/ssh/sshd_config
 }
@@ -104,6 +106,9 @@ function include_extra_conf() {
   # hosts解析订阅
   echo '* * * * * /bin/bash /opt/ops_tools/update_hosts' >> /var/spool/cron/root
   chmod +x /opt/ops_tools/update_hosts
+
+  # 时间订阅
+  echo "*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com" >> /var/spool/cron/root
 
   # enable_extra_service
   systemctl enable sshd docker crond
