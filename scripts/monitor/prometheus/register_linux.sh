@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# unregister: curl -X PUT http://${monitor_center_server}/v1/agent/service/deregister/{id}
 
 idc=$1
 region=$2
