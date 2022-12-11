@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
-monitor_center_server=$1
+idc=$1
+region=$2
 mirrors_center_server='mirrors.itan90.cn'
 devops_scripts_version='20220919-SNAPSHOT'
-
-if [[ $monitor_center_server == '' ]];then monitor_center_server='mirrors.itan90.cn';fi
 
 function make_base_dir() {
   local dirs=(
@@ -45,7 +44,6 @@ function install_base_pack() {
   vim wget ntp ntpdate docker-ce-18.09.9 docker-compose \
   tree epel-release telnet ftp mysql git net-tools bash-completion \
   jq sysstat yum-utils device-mapper-persistent-data lvm2 htop
-  /usr/bin/yum -y localinstall /tmp/ops_tools/zabbix-agent-5.0.2-1.el7.x86_64.rpm
 }
 
 function optimize_base_system() {
@@ -88,18 +86,6 @@ function optimize_base_system() {
     net.core.somaxconn = 1024
 EOF
 
-  cat > /etc/zabbix/zabbix_agentd.conf <<EOF
-    PidFile=/var/run/zabbix/zabbix_agentd.pid
-    LogFile=/var/log/zabbix/zabbix_agentd.log
-    LogFileSize=0
-    Server=$monitor_center_server
-    ServerActive=$monitor_center_server
-    Hostname=$os_address_external
-    HostMetadataItem=system.uname
-    Include=/etc/zabbix/zabbix_agentd.d/*.conf
-    UnsafeUserParameters=1
-EOF
-
   useradd appuser
   usermod -a -G docker appuser
   echo 'appuser ALL=(ALL)       NOPASSWD:ALL' >> /etc/sudoers.d/appuser
@@ -120,10 +106,6 @@ EOF
 }
 
 function include_extra_conf() {
-  # 进程监控
-  curl -s -O https://${mirrors_center_server}/scripts/monitor/monitor.d/process_monitor.tar.gz &>/dev/null
-  tar zxf process_monitor.tar.gz -C /etc/zabbix/zabbix_agentd.d/ && rm -rf process_monitor.tar.gz
-
   # hosts解析订阅
   echo '* * * * * /bin/bash /opt/ops_tools/update_hosts' >> /var/spool/cron/root
   chmod +x /opt/ops_tools/update_hosts
@@ -131,7 +113,11 @@ function include_extra_conf() {
   # 时间订阅
   echo "*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com" >> /var/spool/cron/root
 
-  # DevOps自动注册(appuser)
+  # 监控注册(node_exporter)
+  curl -so register_linux.sh https://${mirrors_center_server}/scripts/monitor/prometheus/register_linux.sh
+  chmod +x /tmp/add_host && bash register_linux.sh ${idc} ${region}
+
+  # 作业平台自动注册(appuser)
   curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}
   chmod +x /tmp/add_host && /tmp/add_host ${os_address_external} ${os_address_external} appuser 22
 
