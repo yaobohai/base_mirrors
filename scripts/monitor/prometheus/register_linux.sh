@@ -6,7 +6,7 @@ monitor_center_server=$3
 hostname=$(hostname|cut -d'.' -f1)
 if [ ${monitor_center_server} == '' ];then monitor_center_server='42.192.186.124:8500';fi
 
-docker ps -a &>/dev/null
+docker ps &>/dev/null
 if [ $? != 0 ]; then echo "[ERROR] host: ${hostname} docker not runing";exit 1;fi
 docker rm -f node-exporter
 docker run -d -p 9100:9100 \
