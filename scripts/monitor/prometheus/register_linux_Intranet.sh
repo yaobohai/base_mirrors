@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# register: curl -s https://mirrors.itan90.cn/scripts/monitor/prometheus/register_linux_Intranet.sh | bash
+# unregister: curl -X PUT http://${monitor_center_server}/v1/agent/service/deregister/{id}
 
 idc='本地云'
 region='中国-上海市'
