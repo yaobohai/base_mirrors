@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-idc=$1
-region=$2
+idc='本地云'
+region='中国-上海市'
 monitor_center_server=$3
 hostname=$(hostname|cut -d'.' -f1)
-os_address_external=$(hostname -I)
+os_address_external=$(hostname -I|awk '{print $1}')
 if [[ $monitor_center_server == '' ]];then monitor_center_server='42.192.186.124:8500';fi
 
 docker ps &>/dev/null
