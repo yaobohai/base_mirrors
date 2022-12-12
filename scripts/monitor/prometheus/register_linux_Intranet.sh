@@ -4,6 +4,7 @@
 
 idc='本地云'
 region='中国-上海市'
+exporter_version='1.3.1'
 monitor_center_server=$3
 hostname=$(hostname|cut -d'.' -f1)
 os_address_external=$(hostname -I|awk '{print $1}')
@@ -19,7 +20,7 @@ docker run -d -p 9100:9100 \
  	--net="host" \
  	--restart=always \
  	--name node-exporter \
-	registry.cn-hangzhou.aliyuncs.com/bohai_repo/node-exporter:1.3.1
+	registry.cn-hangzhou.aliyuncs.com/bohai_repo/node-exporter:${exporter_version}
 
 curl -XPUT -d \
 	'{"id": "'"${hostname}"'",
