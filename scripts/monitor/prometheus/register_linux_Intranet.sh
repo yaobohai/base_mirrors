@@ -23,7 +23,7 @@ docker run -d -p 9100:9100 \
 	registry.cn-hangzhou.aliyuncs.com/bohai_repo/node-exporter:${exporter_version}
 
 curl -XPUT -d \
-	'{"id": "'"${hostname}"'",
+	'{"id": "'"${hostname}-${os_address_external}"'",
 	"name": "linux",
 	"address": "'"${os_address_external}"'",
 	"port": 9100,"Meta": {"country": "'"${region}"'",
