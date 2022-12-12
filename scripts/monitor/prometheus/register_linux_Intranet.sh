@@ -29,5 +29,3 @@ curl -XPUT -d \
 	"tags": ["linux"],
 	"checks": [{"http": "'"http://${os_address_external}:9100/metrics"'",
 	"interval": "35s","timeout": "60s"}]}' http://${monitor_center_server}/v1/agent/service/register
-
-unlink $0
