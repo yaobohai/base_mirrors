@@ -45,8 +45,8 @@ def check_service(service_name):
                 res['critical'].append(i['ServiceID'])
         return res
     else:
-        logging.error("未找到服务 {}".format(service_name))
-        return "未找到服务 {}".format(service_name)
+        logging.error("svc not found {}".format(service_name))
+        return "svc not found {}".format(service_name)
 
 if __name__ == '__main__':
 
