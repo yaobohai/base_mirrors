@@ -25,7 +25,7 @@ jobs:
         uses: burnett01/rsync-deployments@4.1
         with:
           switches: -avzh
-          path: scripts puppet README.md
+          path: scripts README.md
           remote_path: ${{ secrets.MY_DEVOPS_MIRRORS_PATH }}
           remote_host: ${{ secrets.MY_DEVOPS_HOST_ADDRESS }}
           remote_port: ${{ secrets.MY_DEVOPS_HOST_PORT }}
