@@ -40,7 +40,7 @@ jobs:
           type: markdown
           content: |
             # 部署成功
-            > Site: https://mirrors.itan90.cn/ Deploy success
+            > 站点: https://mirrors.itan90.cn/ 部署成功   
             > 更新内容：${{ github.event.commits[0].message }}
 
       - name: 部署失败通知
@@ -51,5 +51,5 @@ jobs:
           type: markdown
           content: |
             # 部署失败
-            > Site: https://mirrors.itan90.cn/ Deploy failure
+            > 站点: https://mirrors.itan90.cn/ 部署失败  
             > 更新内容：${{ github.event.commits[0].message }}
