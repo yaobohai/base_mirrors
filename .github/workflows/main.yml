@@ -1,9 +1,6 @@
+on: [push]
 name: Deploy Resource
-
-on:
-  push:
-    branches:
-      - develop
+run-name: ${{ github.actor }} 因 ${{ github.event.commits[0].message }} 触发部署 🚀
 
 jobs:
   build-and-deploy:
@@ -31,11 +28,10 @@ jobs:
           path: scripts puppet README.md
           remote_path: ${{ secrets.MY_DEVOPS_MIRRORS_PATH }}
           remote_host: ${{ secrets.MY_DEVOPS_HOST_ADDRESS }}
-          remote_port: 60501
-          remote_user: root
+          remote_port: ${{ secrets.MY_DEVOPS_HOST_PORT }}
+          remote_user: ${{ secrets.MY_DEVOPS_HOST_USER }}
           remote_key: ${{ secrets.MY_DEVOPS_RSA_PRIVATE_KEY }}
 
-      # 成功通知
       - name: 部署成功通知
         if: ${{ success() }}
         uses: fifsky/dingtalk-action@master
@@ -43,9 +39,10 @@ jobs:
           url: https://oapi.dingtalk.com/robot/send?access_token=${{ secrets.MY_DEVOPS_DING_TOKEN }}
           type: markdown
           content: |
-            # 💯👨‍💻 Success 🎉🎉🎉
+            # 部署成功
             > Site: https://mirrors.itan90.cn/ Deploy success
-      # 失败通知
+            > 更新内容：${{ github.event.commits[0].message }}
+
       - name: 部署失败通知
         if: ${{ failure() }}
         uses: fifsky/dingtalk-action@master
@@ -53,5 +50,6 @@ jobs:
           url: https://oapi.dingtalk.com/robot/send?access_token=${{ secrets.MY_DEVOPS_DING_TOKEN }}
           type: markdown
           content: |
-            # 💤🤷‍♀️ failure 🙅‍♂️💣
+            # 部署失败
             > Site: https://mirrors.itan90.cn/ Deploy failure
+            > 更新内容：${{ github.event.commits[0].message }}
