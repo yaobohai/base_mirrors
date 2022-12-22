@@ -43,6 +43,10 @@ export save_file_control=true
 export max_save_days=1
 # 文件最大下载次数
 export max_download_nums=1
+
+
+# 取消控制
+unset save_file_control
 ```
 ## 2022年09月17日 增加OpenSpug自动注册脚本
 
