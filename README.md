@@ -1,3 +1,37 @@
+## 2022年12月22日 增加命令行文件共享脚本
+
+- 使用HTTPS加密请求
+- 20MB/s峰值网速下行速度
+- 尽量保持文件大小在2GB内
+- 使用定时清理策略；仅保留14天
+- 使用curl请求即可共享本地文件
+
+使用 
+
+```shell
+# 使用IPV4请求
+curl -4s https://transfer.init.ac/scripts/file.sh|bash -s 本地文件名或本地文件路径
+
+# 使用IPV6请求
+curl -6s https://transfer.init.ac/scripts/file.sh|bash -s 本地文件名或本地文件路径
+```
+
+例子
+
+```shell
+# 本地文件路径
+$ cat /etc/centos-release
+CentOS Linux release 7.9.2009 (Core)
+
+# 开始传输文件并返回文件链接
+$ curl -4s https://transfer.init.ac/scripts/file.sh|bash -s /etc/centos-release
+/etc/centos-release transfer success; file url: https://transfer.init.ac/vC3mF3/centos-release
+
+# 测试请求访问文件
+$ curl https://transfer.init.ac/vC3mF3/centos-release
+CentOS Linux release 7.9.2009 (Core)
+```
+
 ## 2022年09月17日 增加OpenSpug自动注册脚本
 
 使用步骤-创建认证
