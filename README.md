@@ -32,6 +32,18 @@ $ curl https://transfer.init.ac/vC3mF3/centos-release
 CentOS Linux release 7.9.2009 (Core)
 ```
 
+文件共享控制(可选)
+
+```shell
+执行前定义
+
+# 开启控制
+export save_file_control=true
+# 文件最大保存天数
+export max_save_days=1
+# 文件最大下载次数
+export max_download_nums=1
+```
 ## 2022年09月17日 增加OpenSpug自动注册脚本
 
 使用步骤-创建认证
