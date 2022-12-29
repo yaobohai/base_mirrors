@@ -45,6 +45,9 @@ function install_base_pack() {
 }
 
 function optimize_base_system() {
+  # enable service
+  systemctl enable sshd docker crond --now
+  
   # disabled SELinux
   setenforce 0
   sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
@@ -124,7 +127,5 @@ function main() {
   optimize_base_system
   include_extra_conf
 }
-
-systemctl enable sshd docker crond
 
 main && reboot
