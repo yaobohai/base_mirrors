@@ -55,7 +55,6 @@ function optimize_base_system() {
   hwclock -w
   ntpdate -u ntp2.aliyun.com
 
-  # disable firewalld
   systemctl stop firewalld
   systemctl disable firewalld
 
@@ -104,29 +103,19 @@ EOF
 }
 
 function include_extra_conf() {
-  # hosts解析订阅
+
   echo '* * * * * /bin/bash /opt/ops_tools/update_hosts' >> /var/spool/cron/root
   chmod +x /opt/ops_tools/update_hosts
 
-  # 时间订阅
   echo "*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com" >> /var/spool/cron/root
 
-  # 监控注册(node_exporter)
   curl -so register_linux.sh https://${mirrors_center_server}/scripts/monitor/prometheus/register_linux.sh
-  chmod +x /tmp/add_host && bash register_linux.sh 未知厂商 未知地域
+  chmod +x register_linux.sh && bash register_linux.sh 未知厂商 未知地域
 
-  # 作业平台自动注册(appuser)
   curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}
   chmod +x /tmp/add_host && /tmp/add_host ${os_address_external} ${os_address_external} appuser 22
-
-  # enable_extra_service
-  systemctl enable sshd zabbix-agent docker crond
-  systemctl restart sshd zabbix-agent docker crond
 }
 
-function notice() {
-    curl -s "https://push.spug.cc/send/YVgrGJNVjG0N?os_address_external=${os_address_external}&os_address_internal=${os_address_internal}&os_type=${os_type}&os_version=${os_version}&os_cpu_total=${os_cpu_total}&os_mem_total=${os_mem_total}"
-}
 
 function main() {
   make_base_dir
@@ -134,9 +123,8 @@ function main() {
   install_base_pack
   optimize_base_system
   include_extra_conf
-  notice
 }
 
-main
-unlink $0
-reboot
+systemctl enable sshd docker crond
+
+main && reboot
