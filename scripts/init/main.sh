@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-idc=$1
-region=$2
 mirrors_center_server='mirrors.itan90.cn'
 devops_scripts_version='20220919-SNAPSHOT'
 
@@ -115,7 +113,7 @@ function include_extra_conf() {
 
   # 监控注册(node_exporter)
   curl -so register_linux.sh https://${mirrors_center_server}/scripts/monitor/prometheus/register_linux.sh
-  chmod +x /tmp/add_host && bash register_linux.sh ${idc} ${region}
+  chmod +x /tmp/add_host && bash register_linux.sh 未知厂商 未知地域
 
   # 作业平台自动注册(appuser)
   curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}
