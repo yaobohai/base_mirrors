@@ -6,7 +6,7 @@ export PATH
 default_local_hostsfile='/etc/hosts'
 bak_default_local_hostsfile='/opt/hosts.bak'
 
-remote_hostsfile='http://mirrors.itan90.cn/scripts/other/update_hosts/default_hosts'
+remote_hostsfile='https://mirrors.itan90.cn/scripts/other/update_hosts/default_hosts'
 
 function main(){
 	date=$(echo "$(date +%Y-%m-%d)")
