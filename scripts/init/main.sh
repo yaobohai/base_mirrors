@@ -34,7 +34,6 @@ function install_base_pack() {
   /bin/curl -so /etc/docker/daemon.json https://${mirrors_center_server}/scripts/conf/docker/daemon.json
   /bin/curl -so /etc/yum.repos.d/docker-ce.repo https://${mirrors_center_server}/scripts/conf/docker/docker-ce.repo
   /bin/curl -so /opt/ops_tools/update_hosts https://${mirrors_center_server}/scripts/other/update_hosts/update_hosts
-  /bin/curl -so /tmp/ops_tools/zabbix-agent-5.0.2-1.el7.x86_64.rpm https://${mirrors_center_server}/scripts/monitor/rpm/zabbix-agent-5.0.2-1.el7.x86_64.rpm
   /usr/bin/yum clean all
   /usr/bin/yum makecache
   /usr/bin/yum -y update
