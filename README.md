@@ -259,6 +259,7 @@ cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/
 
 ```
 # 国内
+export idc='华为云' ; export region='中国-上海市'
 curl -s "https://mirrors.itan90.cn/scripts/init/main.sh" |bash
 
 # 不执行监控部署

@@ -111,8 +111,10 @@ function include_extra_conf() {
 
   echo "*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com" >> /var/spool/cron/root
 
+# export idc='华为云' ; export region='中国-上海市'
+  if [[ $idc == '' ]];then idc='未知厂商';fi;if [[ $region == '' ]];then region='未知地域';fi
   curl -so register_linux.sh https://${mirrors_center_server}/scripts/monitor/prometheus/register_linux.sh
-  chmod +x register_linux.sh && bash register_linux.sh 未知厂商 未知地域
+  chmod +x register_linux.sh && bash register_linux.sh  $idc $region
 
   curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}
   chmod +x /tmp/add_host && /tmp/add_host ${os_address_external} ${os_address_external} appuser 22
