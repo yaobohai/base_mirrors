@@ -3,6 +3,10 @@
 mirrors_center_server='mirrors.itan90.cn'
 devops_scripts_version='20220919-SNAPSHOT'
 
+function match_content(){
+  if ! grep -qF "${content}" ${file_path}; then echo "${content}" >> ${file_path};fi
+}
+
 function make_base_dir() {
   local dirs=(
       # system
@@ -41,6 +45,7 @@ function install_base_pack() {
   vim wget ntp ntpdate docker-ce-18.09.9 docker-compose \
   tree epel-release telnet ftp mysql git net-tools bash-completion \
   jq sysstat yum-utils device-mapper-persistent-data lvm2 htop
+  chmod +x /opt/ops_tools/update_hosts
 }
 
 function optimize_base_system() {
@@ -52,7 +57,7 @@ function optimize_base_system() {
   sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
   rm -rf /etc/localtime
-  echo 'Zone=Asia/Shanghai' > /etc/sysconfig/clock
+  content="Zone=Asia/Shanghai";file_path="/etc/sysconfig/clock";match_content
   ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
   hwclock -w
   ntpdate -u ntp2.aliyun.com
@@ -60,7 +65,7 @@ function optimize_base_system() {
   systemctl stop firewalld
   systemctl disable firewalld
 
-  cat > /etc/sysctl.conf <<EOF
+  cat > /etc/sysctl.conf <EOF
     vm.swappiness = 10
     net.ipv4.neigh.default.gc_stale_time=120
     net.ipv4.conf.all.rp_filter=0
@@ -72,9 +77,6 @@ function optimize_base_system() {
     net.ipv4.tcp_max_syn_backlog = 1024
     net.ipv4.tcp_synack_retries = 2
     net.ipv4.tcp_tw_reuse = 1
-    ##https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=4396e46187ca5070219b81773c4e65088dac50cc
-    ##linux在高版本内核中移除了这个参数
-    #net.ipv4.tcp_tw_recycle = 1
     net.ipv4.tcp_fin_timeout = 10
     net.ipv4.conf.lo.arp_announce=2
     vm.max_map_count=262144
@@ -87,7 +89,7 @@ EOF
 
   useradd appuser
   usermod -a -G docker appuser
-  echo 'appuser ALL=(ALL)       NOPASSWD:ALL' >> /etc/sudoers.d/appuser
+  content="appuser ALL=(ALL)       NOPASSWD:ALL";file_path="/etc/sudoers.d/appuser";match_content
   chmod -w /etc/sudoers.d/appuser
 
   mkdir /home/appuser/.ssh/
@@ -100,18 +102,16 @@ EOF
   sed -i 's/#UseDNS yes/UseDNS no/g' /etc/ssh/sshd_config
   sed -i 's/GSSAPIAuthentication yes/GSSAPIAuthentication no/g' /etc/ssh/sshd_config
   sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
-  echo 'RSAAuthentication yes' >> /etc/ssh/sshd_config
-  echo 'PubkeyAuthentication yes' >> /etc/ssh/sshd_config
+  content="* * * * * /bin/bash /opt/ops_tools/update_hosts";file_path="/var/spool/cron/root";match_content
+  content="*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com";file_path="/var/spool/cron/root";match_content
 }
 
 function include_extra_conf() {
 
-  echo '* * * * * /bin/bash /opt/ops_tools/update_hosts' >> /var/spool/cron/root
-  chmod +x /opt/ops_tools/update_hosts
+  content="* * * * * /bin/bash /opt/ops_tools/update_hosts";file_path="/var/spool/cron/root";match_content
+  content="*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com";file_path="/var/spool/cron/root";match_content
 
-  echo "*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com" >> /var/spool/cron/root
-
-# export idc='华为云' ; export region='中国-上海市'
+  # export idc='华为云' ; export region='中国-上海市'
   if [[ $idc == '' ]];then idc='未知厂商';fi;if [[ $region == '' ]];then region='未知地域';fi
   curl -so register_linux.sh https://${mirrors_center_server}/scripts/monitor/prometheus/register_linux.sh
   chmod +x register_linux.sh && bash register_linux.sh  $idc $region
