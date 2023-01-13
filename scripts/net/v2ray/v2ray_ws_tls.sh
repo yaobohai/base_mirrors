@@ -1,6 +1,6 @@
 #!/bin/bash
 
-other_scripts_url='http://mirrors.itan90.cn'
+other_scripts_url='https://mirrors.itan90.cn'
 
 #判断系统
 if [ ! -e '/etc/redhat-release' ]; then

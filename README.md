@@ -185,7 +185,7 @@ $ sysctl -p
 ## 2021年09月29日 新增IP查询脚本 ⭐
 
 ```
-$ curl -s -O http://mirrors.itan90.cn/scripts/other/ip_query && chmod +x ip_query && ./ip_query
+$ curl -s -O https://mirrors.itan90.cn/scripts/other/ip_query && chmod +x ip_query && ./ip_query
 # 执行后返回以下信息：
 虚拟 IPV4 地址: 114.0.0.0.0
 虚拟 IPV6 地址: 240e:388...
@@ -198,7 +198,7 @@ $ curl -s -O http://mirrors.itan90.cn/scripts/other/ip_query && chmod +x ip_quer
 1、安装BBR加速 
 
 ```
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/net/bbr/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
+cd /usr/src && wget -N --no-check-certificate "https://mirrors.itan90.cn/scripts/net/bbr/tcp.sh" && chmod +x tcp.sh && ./tcp.sh
 ```
 
 2、更新内核
@@ -214,32 +214,9 @@ cd /usr/src && ./tcp.sh
 ```
 # 输入以下代码
 # 选择：1 回车因为脚本需要安装Nginx，比较慢，大概五六分钟，等待一下。过程中会提示需要输入域名，输入解析到本服务器的域名，然后回车 等即可
-cd /usr/src && curl -O http://mirrors.itan90.cn/scripts/net/v2ray/v2ray_ws_tls.sh && chmod +x v2ray_ws_tls.sh && ./v2ray_ws_tls.sh
+cd /usr/src && curl -O https://mirrors.itan90.cn/scripts/net/v2ray/v2ray_ws_tls.sh && chmod +x v2ray_ws_tls.sh && ./v2ray_ws_tls.sh
 ```
 
-## 2021年08月23日 增加监控探针安装 ⭐
-
----
-
-监控探针版本：5.0.2
-
-监控服务端口：10050
-
-监控服务地址：node.connect.itan90.cn (默认)
-
-监控组件配置：<http://mirrors.itan90.cn/scripts/monitor/monitor.d/>
-
----
-
-```
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/monitor/Install.sh" && chmod +x Install.sh && ./Install.sh
-
-# 使用主动模式脚本
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/monitor/Install_Active.sh" && chmod +x Install_Active.sh && ./Install_Active.sh
-
-# 使用其他服务地址
-cd /usr/src && wget -N --no-check-certificate "http://mirrors.itan90.cn/scripts/monitor/Install.sh" && chmod +x Install.sh && ./Install.sh 你的服务端地址
-```
 
 ## 2021年07月03日 增加服务器初始化脚本
 
