@@ -65,26 +65,26 @@ function optimize_base_system() {
   systemctl stop firewalld
   systemctl disable firewalld
 
-  cat > /etc/sysctl.conf <EOF
-    vm.swappiness = 10
-    net.ipv4.neigh.default.gc_stale_time=120
-    net.ipv4.conf.all.rp_filter=0
-    net.ipv4.conf.default.rp_filter=0
-    net.ipv4.conf.default.arp_announce = 2
-    net.ipv4.conf.all.arp_announce=2
-    net.ipv4.tcp_max_tw_buckets = 5000
-    net.ipv4.tcp_syncookies = 1
-    net.ipv4.tcp_max_syn_backlog = 1024
-    net.ipv4.tcp_synack_retries = 2
-    net.ipv4.tcp_tw_reuse = 1
-    net.ipv4.tcp_fin_timeout = 10
-    net.ipv4.conf.lo.arp_announce=2
-    vm.max_map_count=262144
-    vm.overcommit_memory = 1
-    net.ipv4.ip_forward = 1
-    net.netfilter.nf_conntrack_max = 524288
-    net.nf_conntrack_max = 524288
-    net.core.somaxconn = 1024
+cat << EOF > /etc/sysctl.conf
+vm.swappiness = 10
+net.ipv4.neigh.default.gc_stale_time=120
+net.ipv4.conf.all.rp_filter=0
+net.ipv4.conf.default.rp_filter=0
+net.ipv4.conf.default.arp_announce = 2
+net.ipv4.conf.all.arp_announce=2
+net.ipv4.tcp_max_tw_buckets = 5000
+net.ipv4.tcp_syncookies = 1
+net.ipv4.tcp_max_syn_backlog = 1024
+net.ipv4.tcp_synack_retries = 2
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_fin_timeout = 10
+net.ipv4.conf.lo.arp_announce=2
+vm.max_map_count=262144
+vm.overcommit_memory = 1
+net.ipv4.ip_forward = 1
+net.netfilter.nf_conntrack_max = 524288
+net.nf_conntrack_max = 524288
+net.core.somaxconn = 1024
 EOF
 
   useradd appuser
@@ -92,7 +92,7 @@ EOF
   content="appuser ALL=(ALL)       NOPASSWD:ALL";file_path="/etc/sudoers.d/appuser";match_content
   chmod -w /etc/sudoers.d/appuser
 
-  mkdir /home/appuser/.ssh/
+  mkdir -p /home/appuser/.ssh/
   curl -sk https://${mirrors_center_server}/scripts/init/ssh_keys > /home/appuser/.ssh/authorized_keys
 
   chmod 700 /home/appuser/.ssh
