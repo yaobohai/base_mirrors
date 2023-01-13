@@ -102,8 +102,6 @@ EOF
   sed -i 's/#UseDNS yes/UseDNS no/g' /etc/ssh/sshd_config
   sed -i 's/GSSAPIAuthentication yes/GSSAPIAuthentication no/g' /etc/ssh/sshd_config
   sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config
-  content="* * * * * /bin/bash /opt/ops_tools/update_hosts";file_path="/var/spool/cron/root";match_content
-  content="*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com";file_path="/var/spool/cron/root";match_content
 }
 
 function include_extra_conf() {
@@ -119,7 +117,6 @@ function include_extra_conf() {
   curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}
   chmod +x /tmp/add_host && /tmp/add_host ${os_address_external} ${os_address_external} appuser 22
 }
-
 
 function main() {
   make_base_dir
