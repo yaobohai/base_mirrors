@@ -129,4 +129,4 @@ function main() {
   include_extra_conf
 }
 
-main && reboot
+main;reboot
