@@ -3,9 +3,9 @@
 mirrors_center_server='mirrors.itan90.cn'
 devops_scripts_version='20220919-SNAPSHOT'
 
-function match_content(){
-  if ! grep -qF "${content}" ${file_path}; then echo "${content}" >> ${file_path};fi
-}
+if [ $(id -u) != 0 ];then echo "You must use the root account to allow scripts";exit 1;fi
+
+function match_content(){ if ! grep -qF "${content}" ${file_path}; then echo "${content}" >> ${file_path};fi }
 
 function make_base_dir() {
   local dirs=(
