@@ -3,7 +3,7 @@
 
 
 exporter_version='1.3.1'
-monitor_center_server=$3
+monitor_center_server=$1
 host_addr=$(hostname -I|awk '{print $1}')
 if [[ $monitor_center_server == '' ]];then monitor_center_server='42.192.186.124:8500';fi
 
