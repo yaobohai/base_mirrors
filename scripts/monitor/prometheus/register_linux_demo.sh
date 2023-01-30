@@ -8,7 +8,7 @@ host_addr=$(hostname -I|awk '{print $1}')
 if [[ $monitor_center_server == '' ]];then monitor_center_server='42.192.186.124:8500';fi
 
 docker ps &>/dev/null
-if [ $? != 0 ]; then echo "[ERROR] host: ${hostname} docker not runing";exit 1;fi
+if [ $? != 0 ]; then echo "[ERROR] host: $hostname docker not runing";exit 1;fi
 docker rm -f node-exporter
 docker run -d -p 9100:9100 \
 	-v "/proc:/host/proc:ro" \
