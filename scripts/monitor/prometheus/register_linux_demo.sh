@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # unregister: curl -X PUT http://42.192.186.124:8500/v1/agent/service/deregister/$(hostname -I|awk '{print $1}')
 
-
+# 42.192.186.124:8500 consul的地址
 exporter_version='1.3.1'
 monitor_center_server=$1
 host_addr=$(hostname -I|awk '{print $1}')
