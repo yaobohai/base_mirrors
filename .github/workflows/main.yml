@@ -21,7 +21,7 @@ jobs:
       - name: 优化显示排版
         run: sed -i "6i\    " ./README.md
       - name: 环境准备
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
       - name: 制品准备
