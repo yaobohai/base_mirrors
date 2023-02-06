@@ -1,0 +1,5 @@
+## [命令大全](https://mirrors.itan90.cn/site/linux-command/)
+## [ZABBIX监控](https://zabbix.itan90.cn/)
+## [Prometheus](http://42.192.186.124:9090/)
+## [注册中心](http://42.192.186.124:8500/ui/)
+## [监控配置](https://mirrors.itan90.cn/scripts/monitor/monitor.d/)
