@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-function main() {
-    address=$(hostname -I|awk '{print $1}')
-    echo "host address: ${address}"
-}
-
-main > /tmp/${address}

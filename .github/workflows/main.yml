@@ -42,7 +42,8 @@ jobs:
           tccli configure set region $REGION
       - name: 部署制品
         run: |
-          coscmd upload -rfs --delete ./site/ /
+          coscmd upload -rfs ./site/ /
+          coscmd upload -rfs ./scripts/ /
       - name: 部署成功通知
         if: ${{ success() }}
         uses: fifsky/dingtalk-action@master

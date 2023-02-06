@@ -1,9 +1,0 @@
-{
-    "registry-mirrors": ["https://ub816mdv.mirror.aliyuncs.com"],
-    "graph":"/data/docker",
-    "log-driver": "json-file",
-    "log-opts": {
-      "max-size": "100m"
-    },
-    "exec-opts": ["native.cgroupdriver=systemd"]
-}
