@@ -24,14 +24,23 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
+        env:
+          SECRET_ID: ${{ secrets.COS_API_ID }}
+          SECRET_KEY: ${{ secrets.COS_API_KEY }}
+          BUCKET: ${{ secrets.COS_BUCKET }}
+          REGION: ap-shanghai
       - name: 制品准备
         run: |
           mkdir -p docs && cp README.md docs/index.md
-          pip3 install mkdocs mkdocs-material && mkdocs --version
+          pip3 install mkdocs mkdocs-material coscmd tccli && mkdocs --version
+          coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
+          tccli configure set secretId $SECRET_ID
+          tccli configure set secretKey $SECRET_KEY
+          tccli configure set region $REGION
           mkdocs build
       - name: 部署制品
         run: |
-          ls -lh
+          coscmd upload -rfs --delete ./site/ /
       - name: 部署成功通知
         if: ${{ success() }}
         uses: fifsky/dingtalk-action@master
