@@ -43,7 +43,7 @@ jobs:
       - name: 部署制品
         run: |
           coscmd upload -rfs ./site/ /
-          coscmd upload -rfs ./scripts/ /
+          coscmd upload -rfs ./scripts/ ./
       - name: 部署成功通知
         if: ${{ success() }}
         uses: fifsky/dingtalk-action@master
