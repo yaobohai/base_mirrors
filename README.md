@@ -48,7 +48,7 @@ export max_download_nums=1
 # 取消控制
 unset save_file_control
 ```
-## 2022年09月17日 增加OpenSpug自动注册脚本
+## 2022年09月17日 增加Spug自动注册脚本
 
 使用步骤-创建认证
 
@@ -193,7 +193,7 @@ $ curl -s -O https://mirrors.itan90.cn/scripts/other/ip_query && chmod +x ip_que
 真实 IPV6 地址: 240e:388...
 ```
 
-## 2021年09月10日 新增部署V2RAY脚本 ⭐
+## 2021年09月10日 增加V2RAY部署脚本 ⭐
 
 1、安装BBR加速 
 
@@ -218,7 +218,7 @@ cd /usr/src && curl -O https://mirrors.itan90.cn/scripts/net/v2ray/v2ray_ws_tls.
 ```
 
 
-## 2021年07月03日 增加服务器初始化脚本
+## 2021年07月03日 增加初始化脚本
 
 2022年05月18日 更新笔记
 
@@ -244,4 +244,4 @@ curl -s "https://mirrors.itan90.cn/scripts/init/main_no_monitor.sh" |bash
 ```
 
 
-## 2021年07月02日 mirrors 信息发布建立
+## 2021年07月02日 基础源仓库建立

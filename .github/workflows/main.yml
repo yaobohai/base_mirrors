@@ -20,18 +20,18 @@ jobs:
         run: sed -i "4i\    更新内容：${{ github.event.commits[0].message }}" ./README.md
       - name: 优化显示排版
         run: sed -i "6i\    " ./README.md
-        
-      - name: 部署站点资源
-        uses: burnett01/rsync-deployments@4.1
+      - name: 环境准备
+        uses: actions/setup-python@v2
         with:
-          switches: -avzh
-          path: scripts README.md
-          remote_path: ${{ secrets.MY_DEVOPS_MIRRORS_PATH }}
-          remote_host: ${{ secrets.MY_DEVOPS_HOST_ADDRESS }}
-          remote_port: ${{ secrets.MY_DEVOPS_HOST_PORT }}
-          remote_user: ${{ secrets.MY_DEVOPS_HOST_USER }}
-          remote_key: ${{ secrets.MY_DEVOPS_RSA_PRIVATE_KEY }}
-
+          python-version: 3.9.1
+      - name: 制品准备
+        run: |
+          mkdir -p docs && cp README.md docs/index.md
+          pip3 install mkdocs mkdocs-material && mkdocs --version
+          mkdocs build
+      - name: 部署制品
+        run: |
+          ls -lh
       - name: 部署成功通知
         if: ${{ success() }}
         uses: fifsky/dingtalk-action@master
