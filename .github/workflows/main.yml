@@ -21,9 +21,9 @@ jobs:
       - name: 优化显示排版
         run: sed -i "6i\    " ./README.md
       - name: 环境准备
-        uses: actions/setup-python@v4
+        uses: actions/setup-node@master
         with:
-          python-version: '3.10'
+          node-version: "v16.13.1"
         env:
           SECRET_ID: ${{ secrets.COS_API_ID }}
           SECRET_KEY: ${{ secrets.COS_API_KEY }}
