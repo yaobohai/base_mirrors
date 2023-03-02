@@ -109,7 +109,7 @@ function include_extra_conf() {
   content="* * * * * /bin/bash /opt/ops_tools/update_hosts";file_path="/var/spool/cron/root";match_content
   content="*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com";file_path="/var/spool/cron/root";match_content
 
-  # export idc='华为云' ; export region='中国-上海市'
+  # export idc='华为云' ; export region='中国-上海市' ; export app='v2ray'
   if [[ $idc == '' ]];then idc='未知厂商';fi;if [[ $region == '' ]];then region='未知地域';fi
   curl -so register_linux.sh https://${mirrors_center_server}/scripts/monitor/prometheus/register_linux.sh
   chmod +x register_linux.sh && bash register_linux.sh  $idc $region

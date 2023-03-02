@@ -3,11 +3,11 @@
 
 idc=$1
 region=$2
+app=$3
 exporter_version='1.3.1'
-monitor_center_server=$3
+monitor_center_server='42.192.186.124:8500'
 hostname=$(hostname|cut -d'.' -f1)
 os_address_external=$(curl -4s ip.sb)
-if [[ $monitor_center_server == '' ]];then monitor_center_server='42.192.186.124:8500';fi
 
 docker ps &>/dev/null
 if [ $? != 0 ]; then echo "[ERROR] host: ${hostname} docker not runing";exit 1;fi
@@ -26,6 +26,7 @@ curl -XPUT -d \
 	"address": "'"${os_address_external}"'",
 	"port": 9100,"Meta": {"country": "'"${region}"'",
 	"idc": "'"${idc}"'",
+	"app": "'"${app}"'",
 	"ip": "'"${os_address_external}"'"},
 	"tags": ["linux"],
 	"checks": [{"http": "'"http://${os_address_external}:9100/metrics"'",
