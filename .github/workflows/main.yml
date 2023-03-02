@@ -20,30 +20,18 @@ jobs:
         run: sed -i "4i\    更新内容：${{ github.event.commits[0].message }}" ./README.md
       - name: 优化显示排版
         run: sed -i "6i\    " ./README.md
-      - name: 环境准备
-        uses: actions/setup-node@master
+
+      - name: 部署站点资源
+        uses: burnett01/rsync-deployments@4.1
         with:
-          node-version: "v16.13.1"
-      - name: 制品准备
-        run: |
-          mkdir -p docs && cp README.md docs/index.md
-          pip3 install mkdocs mkdocs-material coscmd tccli && mkdocs --version
-          mkdocs build
-      - name: 注入配置
-        env:
-          SECRET_ID: ${{ secrets.COS_API_ID }}
-          SECRET_KEY: ${{ secrets.COS_API_KEY }}
-          BUCKET: ${{ secrets.COS_BUCKET }}
-          REGION: ap-shanghai
-        run: |
-          coscmd config -a $SECRET_ID -s $SECRET_KEY -b $BUCKET -r $REGION
-          tccli configure set secretId $SECRET_ID
-          tccli configure set secretKey $SECRET_KEY
-          tccli configure set region $REGION
-      - name: 部署制品
-        run: |
-          coscmd upload -rfs ./site/ /
-          coscmd upload -rfs ./scripts/ ./
+          switches: -avzh
+          path: scripts README.md
+          remote_path: ${{ secrets.MY_DEVOPS_MIRRORS_PATH }}
+          remote_host: ${{ secrets.MY_DEVOPS_HOST_ADDRESS }}
+          remote_port: ${{ secrets.MY_DEVOPS_HOST_PORT }}
+          remote_user: ${{ secrets.MY_DEVOPS_HOST_USER }}
+          remote_key: ${{ secrets.MY_DEVOPS_RSA_PRIVATE_KEY }}
+
       - name: 部署成功通知
         if: ${{ success() }}
         uses: fifsky/dingtalk-action@master
