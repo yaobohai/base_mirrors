@@ -236,7 +236,7 @@ cd /usr/src && curl -O https://mirrors.itan90.cn/scripts/net/v2ray/v2ray_ws_tls.
 
 ```
 # 国内
-export idc='华为云' ; export region='中国-上海市'
+export idc='华为云' ; export region='中国-上海市' ; export app='v2ray'
 curl -s "https://mirrors.itan90.cn/scripts/init/main.sh" |bash
 
 # 不执行监控部署
