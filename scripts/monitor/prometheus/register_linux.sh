@@ -10,6 +10,7 @@ hostname=$(hostname|cut -d'.' -f1)
 os_address_external=$(curl -4s ip.sb)
 
 docker ps &>/dev/null
+if [[ $app == '' ]]; then app='None';fi
 if [ $? != 0 ]; then echo "[ERROR] host: ${hostname} docker not runing";exit 1;fi
 docker rm -f node-exporter
 docker run -d -p 9100:9100 \
