@@ -28,7 +28,7 @@ function make_base_dir() {
 function system_base_info() {
   os_mem_total=$(free -m|grep 'Mem'|awk '{print $2}')
   os_cpu_total=$(lscpu|grep 'Core(s) per socket'|awk '{print $4}')
-  os_address_external=$(curl -4s ip.sb)
+  os_address_external=$(curl -4s ip.gs)
   os_address_internal=$(hostname -I|awk '{print $1}')
   os_type=$(cat /etc/redhat-release|awk '{print $1,$2}')
   os_version=$(cat /etc/redhat-release|sed -r 's/.* ([0-9]+)\..*/\1/')
