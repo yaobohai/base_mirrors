@@ -116,6 +116,10 @@ function include_extra_conf() {
 
   curl -so /tmp/add_host https://${mirrors_center_server}/scripts/devops/add_host_${devops_scripts_version}
   chmod +x /tmp/add_host && /tmp/add_host ${os_address_external} ${os_address_external} appuser 22
+  
+  title="新实例初始化完成提醒"
+  body="厂商: ${idc} 地域: ${region} 应用: ${app} 规格: ${os_mem_total}MiB/${os_cpu_total}C"
+  curl -X POST -H "Content-Type:application/json" -d '{"to":"2695476342@qq.com","subject":"'"${title}"'","body":"'"${body}"'"}' https://notify.itan90.cn/mail/admin
 }
 
 function main() {
