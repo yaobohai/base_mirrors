@@ -1,3 +1,9 @@
+## CloudFlare自选IP列表
+
+- 每小时更新一次
+
+点击跳转：[CloudFlare自选IP列表](https://mirrors.itan90.cn/ava_nodes/)
+
 ## 2022年12月22日 增加命令行文件共享脚本 
 
 - 20MB/s峰值下行速度
