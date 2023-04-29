@@ -27,6 +27,7 @@ curl -XPUT -d \
 	"address": "'"${os_address_external}"'",
 	"port": 9100,"Meta": {"country": "'"${region}"'",
 	"idc": "'"${idc}"'",
+		"app": "'"${hostname}"'",
 	"ip": "'"${os_address_external}"'"},
 	"tags": ["linux"],
 	"checks": [{"http": "'"http://${os_address_external}:9100/metrics"'",
