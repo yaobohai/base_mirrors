@@ -208,6 +208,8 @@ $ curl -s -O https://mirrors.itan90.cn/scripts/other/ip_query && chmod +x ip_que
 
 ## 2021年09月10日 增加V2RAY部署脚本 ⭐
 
+1-2为可选步骤
+
 1、安装BBR加速 
 
 ```
@@ -222,14 +224,62 @@ cd /usr/src && wget -N --no-check-certificate "https://mirrors.itan90.cn/scripts
 cd /usr/src && ./tcp.sh
 ```
 
-3、安装V2RAY
+-------------
+
+3、安装v2ray
 
 ```
-# 输入以下代码
-# 选择：1 回车因为脚本需要安装Nginx，比较慢，大概五六分钟，等待一下。过程中会提示需要输入域名，输入解析到本服务器的域名，然后回车 等即可
-cd /usr/src && curl -O https://mirrors.itan90.cn/scripts/net/v2ray/v2ray_ws_tls.sh && chmod +x v2ray_ws_tls.sh && ./v2ray_ws_tls.sh
+# 准备材料
+
+1、准备域名*1
+2、域名配套的SSL证书*1
+3、可使用Docker
 ```
 
+3.1、目录结构：
+
+```shell
+tree /app
+
+/app/
+└── v2ray
+    ├── ssl
+    │   ├── ssl.cer
+    │   └── ssl.key
+    └── startup.sh
+```
+
+3.2、启动程序 并将启动脚本写入`/app/startup.sh`
+
+3.2.1、声明环境变量
+
+```shell
+# 对外发布的端口
+export v2ray_port=''
+# 对外发布的域名
+export v2ray_domain=''
+# 使用者邮箱
+export v2ray_email=''
+```
+
+```shell
+docker rm -f v2ray
+docker run -itd --name=v2ray \
+-p ${v2ray_port}:443 \
+-e v2ray_port=${v2ray_port} \
+-e v2ray_email=${v2ray_email}  \
+-e v2ray_domain=${v2ray_domain} \
+-e v2ray_uuid=$(cat /proc/sys/kernel/random/uuid) \
+-e v2ray_path=$(cat /dev/urandom | head -1 | md5sum | head -c 4) \
+-v /app/v2ray/ssl/:/etc/nginx/ssl  \
+registry.ap-northeast-1.aliyuncs.com/bohai_repo/v2ray:1.0.0-SNAPSHOT
+```
+
+3.2.2、查看日志，获取链接信息
+
+```shell
+docker logs -f --tail=200 v2ray
+```
 
 ## 2021年07月03日 增加初始化脚本
 
