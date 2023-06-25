@@ -148,22 +148,14 @@ registry.cn-hangzhou.aliyuncs.com/bohai_repo/frpc:${frpc_version}
 
 ## 2021年12月19日 增加远程下载工具 ⭐
 
-1、安装Docker(已安装则可忽略)
-
-```
-yum -y install docker \
-&& systemctl start docker \
-&& systemctl enable docker
-```
-
-2、安装远程下载工具程序
+1、安装远程下载工具程序
 
 ```
 首选地址：curl -s https://oss.itan90.cn/files/remote_download/init.sh|bash
 备用地址：curl -s https://oss-1251604004.cos.ap-shanghai.myqcloud.com/files/remote_download/init.sh|bash
 ```
 
-3、访问
+2、访问
 
 ```
 执行脚本后返回表示安装成功：
@@ -195,16 +187,6 @@ net.ipv6.conf.lo.disable_ipv6 = 0
 $ sysctl -p
 ```
 
-## 2021年09月29日 新增IP查询脚本 ⭐
-
-```
-$ curl -s -O https://mirrors.itan90.cn/scripts/other/ip_query && chmod +x ip_query && ./ip_query
-# 执行后返回以下信息：
-虚拟 IPV4 地址: 114.0.0.0.0
-虚拟 IPV6 地址: 240e:388...
-真实 IPV4 地址: 114.0.0.0.0
-真实 IPV6 地址: 240e:388...
-```
 
 ## 2021年09月10日 增加V2RAY部署脚本 ⭐
 
@@ -283,27 +265,10 @@ docker logs -f --tail=200 v2ray
 
 ## 2021年07月03日 增加初始化脚本
 
-2022年05月18日 更新笔记
-
-> 初始化基础环境清单
-
-- 主机监控
-- 进程监控
-- 优化内核
-- 时间同步
-- DOCKER
-- 基础工具包
-- 域名解析订阅
-- SSH-KEY登录
-- DOCKER COMPOSE
 
 ```
-# 国内
 export idc='华为云' ; export region='中国-上海市' ; export app='v2ray'
 curl -s "https://mirrors.itan90.cn/scripts/init/main.sh" |bash
-
-# 不执行监控部署
-curl -s "https://mirrors.itan90.cn/scripts/init/main_no_monitor.sh" |bash
 ```
 
 
