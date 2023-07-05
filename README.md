@@ -151,9 +151,10 @@ registry.cn-hangzhou.aliyuncs.com/bohai_repo/frpc:${frpc_version}
 1、安装远程下载工具程序
 
 ```
-首选地址：curl -s https://oss.itan90.cn/files/remote_download/init.sh|bash
-备用地址：curl -s https://oss-1251604004.cos.ap-shanghai.myqcloud.com/files/remote_download/init.sh|bash
+首选地址：curl -s https://oss.itan90.cn/files/remote_download/init.sh|bash -s
+备用地址：curl -s https://oss-1251604004.cos.ap-shanghai.myqcloud.com/files/remote_download/init.sh|bash -s
 ```
+
 
 2、访问
 
@@ -162,6 +163,10 @@ registry.cn-hangzhou.aliyuncs.com/bohai_repo/frpc:${frpc_version}
 The remote download tool has been started successfully! Access address is: http://xx.xx.xx.xx:8999
 
 访问返回的地址后即可打开网页；默认存在50MB大小的文件用来测试下载速度
+
+# 默认返回的地址以及注册在系统内的IP为本机的公网IP地址，如需指定IP，需在部署命令后填写指定IP。如：
+
+curl -s https://oss.itan90.cn/files/remote_download/init.sh|bash -s 10.0.12.3
 ```
 
 ## 2021年10月01日 新增部署WARP支持
