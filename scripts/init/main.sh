@@ -44,7 +44,7 @@ function install_base_pack() {
   /usr/bin/yum -y install sudo gcc gcc-c++ \
   vim wget ntp ntpdate docker-ce-18.09.9 docker-compose \
   tree epel-release telnet ftp mysql git net-tools bash-completion \
-  jq sysstat yum-utils device-mapper-persistent-data lvm2 htop
+  jq sysstat yum-utils device-mapper-persistent-data lvm2 htop expect
   chmod +x /opt/ops_tools/update_hosts
 }
 
