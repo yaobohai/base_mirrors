@@ -120,6 +120,9 @@ function include_extra_conf() {
   title="新实例初始化完成提醒"
   body="厂商: ${idc} 地域: ${region} 应用: ${app} 规格: ${os_mem_total}MiB/${os_cpu_total}C"
   curl -X POST -H "Content-Type:application/json" -d '{"to":"2695476342@qq.com","subject":"'"${title}"'","body":"'"${body}"'"}' https://notify.itan90.cn/mail/admin
+
+  # 自动配置assh
+  curl -s https://${mirrors_center_server}/scripts/init/install_assh.sh | bash -s
 }
 
 function main() {
