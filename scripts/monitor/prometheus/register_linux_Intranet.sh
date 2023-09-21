@@ -11,11 +11,13 @@ hostname=$(hostname|cut -d'.' -f1)
 os_address_external=$(hostname -I|awk '{print $1}')
 if [[ $monitor_center_server == '' ]];then monitor_center_server='42.192.186.124:8500';fi
 
+docker rm -f node-exporter
+rm -rf  ${exporter_path}/node_exporter
 mkdir -p ${exporter_path}
 curl -so /tmp/node_exporter-v${exporter_version}.tar.gz \
 https://mirrors.itan90.cn/scripts/monitor/prometheus/resouce/node_exporter-${exporter_version}.tar.gz \
 && tar zxvf /tmp/node_exporter-v${exporter_version}.tar.gz -C ${exporter_path} \
-&& mv /app/node_exporter/node_exporter.service /etc/systemd/system/ \
+&& mv ${exporter_path}/node_exporter/node_exporter.service /etc/systemd/system/ \
 && systemctl daemon-reload \
 && systemctl enable node_exporter --now
 
