@@ -10,11 +10,11 @@ monitor_center_server='42.192.186.124:8500'
 hostname=$(hostname|cut -d'.' -f1)
 os_address_external=$(curl -4s ip.gs)
 
-docker rm -f node-exporter
+docker rm -f node-exporter &>/dev/null
 rm -rf  ${exporter_path}/node_exporter
 mkdir -p ${exporter_path}
 curl -so /tmp/node_exporter-v${exporter_version}.tar.gz \
-https://mirrors.itan90.cn/scripts/monitor/prometheus/resouce/node_exporter-${exporter_version}.tar.gz \
+https://mirrors.itan90.cn/scripts/monitor/prometheus/resouce/node_exporter-v${exporter_version}.tar.gz \
 && tar zxvf /tmp/node_exporter-v${exporter_version}.tar.gz -C ${exporter_path} \
 && mv ${exporter_path}/node_exporter/node_exporter.service /etc/systemd/system/ \
 && systemctl daemon-reload \
