@@ -4,22 +4,20 @@
 
 idc='本地云'
 region='中国-上海市'
-exporter_version='1.3.1'
+exporter_path='/app'
+exporter_version='1.6.1'
 monitor_center_server=$3
 hostname=$(hostname|cut -d'.' -f1)
 os_address_external=$(hostname -I|awk '{print $1}')
 if [[ $monitor_center_server == '' ]];then monitor_center_server='42.192.186.124:8500';fi
 
-docker ps &>/dev/null
-if [ $? != 0 ]; then echo "[ERROR] host: ${hostname} docker not runing";exit 1;fi
-docker rm -f node-exporter
-docker run -d -p 9100:9100 \
-	-v "/proc:/host/proc:ro" \
-	-v "/sys:/host/sys:ro" \
- 	-v "/:/rootfs:ro" \
- 	--restart=always \
- 	--name node-exporter \
-	registry.cn-hangzhou.aliyuncs.com/bohai_repo/node-exporter:${exporter_version}
+mkdir -p ${exporter_path}
+curl -so /tmp/node_exporter-v${exporter_version}.tar.gz \
+https://mirrors.itan90.cn/scripts/monitor/prometheus/resouce/node_exporter-${exporter_version}.tar.gz \
+&& tar zxvf /tmp/node_exporter-v${exporter_version}.tar.gz -C ${exporter_path} \
+&& mv /app/node_exporter/node_exporter.service /etc/systemd/system/ \
+&& systemctl daemon-reload \
+&& systemctl enable node_exporter --now
 
 curl -XPUT -d \
 	'{"id": "'"${hostname}-${os_address_external}"'",

@@ -4,22 +4,19 @@
 idc=$1
 region=$2
 app=$3
-exporter_version='1.3.1'
+exporter_path='/app'
+exporter_version='1.6.1'
 monitor_center_server='42.192.186.124:8500'
 hostname=$(hostname|cut -d'.' -f1)
-os_address_external=$(curl -4s ip.sb)
+os_address_external=$(curl -4s ip.gs)
 
-docker ps &>/dev/null
-if [[ $app == '' ]]; then app='None';fi
-if [ $? != 0 ]; then echo "[ERROR] host: ${hostname} docker not runing";exit 1;fi
-docker rm -f node-exporter
-docker run -d -p 9100:9100 \
-	-v "/proc:/host/proc:ro" \
-	-v "/sys:/host/sys:ro" \
- 	-v "/:/rootfs:ro" \
- 	--restart=always \
- 	--name node-exporter \
-	registry.cn-hangzhou.aliyuncs.com/bohai_repo/node-exporter:${exporter_version}
+mkdir -p ${exporter_path}
+curl -so /tmp/node_exporter-v${exporter_version}.tar.gz \
+https://mirrors.itan90.cn/scripts/monitor/prometheus/resouce/node_exporter-${exporter_version}.tar.gz \
+&& tar zxvf /tmp/node_exporter-v${exporter_version}.tar.gz -C ${exporter_path} \
+&& mv /app/node_exporter/node_exporter.service /etc/systemd/system/ \
+&& systemctl daemon-reload \
+&& systemctl enable node_exporter --now
 
 curl -XPUT -d \
 	'{"id": "'"${hostname}"'",
@@ -32,5 +29,3 @@ curl -XPUT -d \
 	"tags": ["linux"],
 	"checks": [{"http": "'"http://${os_address_external}:9100/metrics"'",
 	"interval": "35s","timeout": "60s"}]}' http://${monitor_center_server}/v1/agent/service/register
-
-unlink $0
