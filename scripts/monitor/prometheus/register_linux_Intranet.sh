@@ -11,6 +11,7 @@ hostname=$(hostname|cut -d'.' -f1)
 os_address_external=$(hostname -I|awk '{print $1}')
 if [[ $monitor_center_server == '' ]];then monitor_center_server='42.192.186.124:8500';fi
 
+docker rm -f node-exporter
 rm -rf  ${exporter_path}/node_exporter
 mkdir -p ${exporter_path}
 curl -so /tmp/node_exporter-v${exporter_version}.tar.gz \
