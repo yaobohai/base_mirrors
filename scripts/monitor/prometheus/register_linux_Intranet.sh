@@ -23,12 +23,12 @@ https://mirrors.itan90.cn/scripts/monitor/prometheus/resouce/node_exporter-v${ex
 
 curl -XPUT -d \
 	'{"id": "'"${hostname}-${os_address_external}"'",
-	"name": "linux",
+	"name": "linux-internal",
 	"address": "'"${os_address_external}"'",
 	"port": 9100,"Meta": {"country": "'"${region}"'",
 	"idc": "'"${idc}"'",
 		"app": "'"${hostname}"'",
 	"ip": "'"${os_address_external}"'"},
-	"tags": ["linux"],
+	"tags": ["linux-internal"],
 	"checks": [{"http": "'"http://${os_address_external}:9100/metrics"'",
 	"interval": "35s","timeout": "60s"}]}' http://${monitor_center_server}/v1/agent/service/register
