@@ -10,11 +10,20 @@ monitor_center_server='42.192.186.124:8500'
 hostname=$(hostname|cut -d'.' -f1)
 os_address_external=$(curl -4s ip.gs)
 
-docker rm -f node-exporter &>/dev/null
+# cpu platform
+if [[ $(uname -m) == 'x86_64' ]];then
+  cpu_platform='amd64'
+elif [[ $(uname -m) == 'aarch64' ]];then
+  cpu_platform='arm64'
+else
+  echo 'Unsupported'
+  exit 1
+fi
+
 rm -rf  ${exporter_path}/node_exporter
 mkdir -p ${exporter_path}
 curl -so /tmp/node_exporter-v${exporter_version}.tar.gz \
-https://mirrors.itan90.cn/scripts/monitor/prometheus/resouce/node_exporter-v${exporter_version}.tar.gz \
+https://mirrors.itan90.cn/scripts/monitor/prometheus/resouce/node_exporter-${exporter_version}.linux-${cpu_platform}.tar.gz \
 && tar zxvf /tmp/node_exporter-v${exporter_version}.tar.gz -C ${exporter_path} \
 && mv ${exporter_path}/node_exporter/node_exporter.service /etc/systemd/system/ \
 && systemctl daemon-reload \
